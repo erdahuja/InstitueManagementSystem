@@ -1,0 +1,87 @@
+package com.bmpl.ims.users.views;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+
+public class CourseView extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+				
+	void opencourseView(){
+		CourseView frame = new CourseView();
+		frame.setVisible(true);
+		
+		
+	}
+	public CourseView() {
+
+
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		textField = new JTextField();
+		textField.setBounds(214, 45, 114, 19);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblCourse = new JLabel("Course Name ");
+		lblCourse.setBounds(55, 47, 141, 17);
+		contentPane.add(lblCourse);
+		
+		JLabel lblCourseDur = new JLabel("Course Duration");
+		lblCourseDur.setBounds(55, 76, 141, 15);
+		contentPane.add(lblCourseDur);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(224, 71, 32, 24);
+		contentPane.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(320, 71, 32, 24);
+		contentPane.add(comboBox_1);
+		
+		JLabel lblDays = new JLabel("Days");
+		lblDays.setBounds(368, 71, 70, 15);
+		contentPane.add(lblDays);
+		
+		JLabel lblMonths = new JLabel("Months");
+		lblMonths.setBounds(261, 71, 70, 15);
+		contentPane.add(lblMonths);
+		
+		JLabel lblFees = new JLabel("Course Fees:");
+		lblFees.setBounds(55, 109, 106, 15);
+		contentPane.add(lblFees);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(271, 107, 114, 19);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblRegistration = new JLabel("Registration :");
+		lblRegistration.setBounds(173, 109, 97, 15);
+		contentPane.add(lblRegistration);
+		
+		JLabel lblCourse_1 = new JLabel("Course :");
+		lblCourse_1.setBounds(173, 139, 70, 15);
+		contentPane.add(lblCourse_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(281, 138, 114, 19);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+	}
+}

@@ -1,0 +1,102 @@
+package com.bmpl.ims.users.views;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+
+public class CourseView extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txtName;
+	private JTextField txtRegistration;
+	private JTextField txtCourse;
+	private JTextField txtCourseTotal;
+	private static JFrame frame;
+				
+	public static void main(String[] args) {
+		frame = new CourseView();
+		
+		frame.setVisible(true);
+		
+		
+	}
+	public CourseView() {
+
+
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		
+		frame.setTitle("Add Course");
+		setContentPane(contentPane);
+		
+		txtName = new JTextField();
+		txtName.setBounds(214, 45, 114, 19);
+		contentPane.add(txtName);
+		txtName.setColumns(10);
+		
+		JLabel lblCourse = new JLabel("Course Name ");
+		lblCourse.setBounds(55, 47, 141, 17);
+		contentPane.add(lblCourse);
+		
+		JLabel lblCourseDur = new JLabel("Course Duration");
+		lblCourseDur.setBounds(55, 76, 141, 15);
+		contentPane.add(lblCourseDur);
+		
+		JComboBox cbMonth = new JComboBox();
+		cbMonth.setBounds(224, 71, 32, 24);
+		contentPane.add(cbMonth);
+		
+		JComboBox cbDays = new JComboBox();
+		cbDays.setBounds(320, 71, 32, 24);
+		contentPane.add(cbDays);
+		
+		JLabel lblDays = new JLabel("Days");
+		lblDays.setBounds(368, 71, 70, 15);
+		contentPane.add(lblDays);
+		
+		JLabel lblMonths = new JLabel("Months");
+		lblMonths.setBounds(261, 71, 70, 15);
+		contentPane.add(lblMonths);
+		
+		JLabel lblFees = new JLabel("Course Fees:");
+		lblFees.setBounds(55, 109, 106, 15);
+		contentPane.add(lblFees);
+		
+		txtRegistration = new JTextField();
+		txtRegistration.setBounds(271, 107, 114, 19);
+		contentPane.add(txtRegistration);
+		txtRegistration.setColumns(10);
+		
+		JLabel lblRegistration = new JLabel("Registration :");
+		lblRegistration.setBounds(173, 109, 97, 15);
+		contentPane.add(lblRegistration);
+		
+		JLabel lblCourse_1 = new JLabel("Course :");
+		lblCourse_1.setBounds(173, 139, 70, 15);
+		contentPane.add(lblCourse_1);
+		
+		txtCourse = new JTextField();
+		txtCourse.setBounds(271, 138, 114, 19);
+		contentPane.add(txtCourse);
+		txtCourse.setColumns(10);
+		
+		JLabel lblTotal = new JLabel("Total :");
+		lblTotal.setBounds(173, 174, 70, 15);
+		contentPane.add(lblTotal);
+		
+		txtCourseTotal = new JTextField();
+		txtCourseTotal.setBounds(271, 169, 114, 19);
+		contentPane.add(txtCourseTotal);
+		txtCourseTotal.setColumns(10);
+		frame.add(contentPane);
+		
+	}
+}

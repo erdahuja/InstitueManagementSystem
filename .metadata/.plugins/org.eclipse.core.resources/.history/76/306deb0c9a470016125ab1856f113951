@@ -1,0 +1,12 @@
+package com.bmpl.ims.users.dto;
+
+public class AddCourseDTO {
+String course_name;
+String course_description;
+String trainer_name;
+int duration;
+int fees;
+
+	
+
+}

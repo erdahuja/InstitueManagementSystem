@@ -1,0 +1,7 @@
+package com.bmpl.ims.users.dto;
+
+public class AddCourseDTO {
+
+	
+
+}

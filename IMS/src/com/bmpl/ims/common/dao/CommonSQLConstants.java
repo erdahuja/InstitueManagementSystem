@@ -1,0 +1,6 @@
+package com.bmpl.ims.common.dao;
+
+public interface CommonSQLConstants {
+public static String LOGIN_SQL = "select userid,password from user_mst where userid=? and password=?";
+public static String ADDCOURSE_SQL="INSERT INTO `InstituteProject`.`courses_table`(`course_name`,`fees`,`course_description`,`duration`,`trainer_name`) VALUES(?,?,?,?,?)";
+}

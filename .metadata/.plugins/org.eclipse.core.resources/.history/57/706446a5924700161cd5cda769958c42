@@ -1,0 +1,43 @@
+package com.bmpl.ims.common.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+
+
+public class CommonDAO {
+	
+	
+public static void main(String[] args) {
+
+
+new CommonDAO();
+}
+	private CommonDAO(){
+		
+		
+		ResourceBundle rb = ResourceBundle.getBundle("db");
+		try {
+			Class.forName(rb.getString("drivername"));
+			System.out.println("coonnected");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(rb.getString("dburl")
+					,rb.getString("userid"),rb.getString("password"));
+			System.out.println("coonnected");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	/*public static Connection getConnection() throws ClassNotFoundException, SQLException{
+	
+	}
+	*/
+}
