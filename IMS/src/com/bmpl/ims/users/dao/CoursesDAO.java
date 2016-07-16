@@ -17,7 +17,7 @@ public class CoursesDAO {
 		String sql = CommonSQLConstants.ADDCOURSE_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		int rs ;
+		int rs;
 		try {
 			con = CommonDAO.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -42,38 +42,60 @@ public class CoursesDAO {
 		return courseAdded;
 
 	}
-	
-	
-	public ArrayList<String> getCourse() throws SQLException{
-		boolean coursesShown=false;
-		String sql=CommonSQLConstants.VIEWCOURSE_SQL;
+
+	public boolean deleteCourse(String itemString) throws SQLException {
+		boolean isDeleted = false;
+		String sql = CommonSQLConstants.DELETECOURSE_SQL;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs ;
-		ArrayList<String> list=new ArrayList<String>();
-		try{
+		int rs;
+		try {
+			con = CommonDAO.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, itemString);
+			rs = pstmt.executeUpdate();
+
+			isDeleted = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed to delete course");
+		} finally {
+			con.close();
+		}
+		return isDeleted;
+
+	}
+
+	public ArrayList<String> getCourse() throws SQLException {
+		boolean coursesShown = false;
+		String sql = CommonSQLConstants.VIEWCOURSE_SQL;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
 			con = CommonDAO.getConnection();
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
-			
-					list.add(rs.getString("course_name"));
-				
+
+				list.add(rs.getString("course_name"));
+
 				coursesShown = true;
 			}
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			coursesShown=false;
-			
-		}
-		finally{
+			coursesShown = false;
+
+		} finally {
 			con.close();
 		}
 		return list;
-		
+
 	}
-	
 
 }
