@@ -15,17 +15,16 @@ import com.bmpl.ims.users.dto.AddCourseDTO;
 
 public class CourseView extends JFrame {
 
-	private JTextField txtName;
-	private JTextField txtRegistration;
-	private JTextField txtCourse;
-	private JTextField txtCourseTotal;
-	private JTextField txtTrainer;
-	private JTextArea txtDays;
-	private JTextArea txtDescription;
-	private static JFrame frame;
+	static JTextField txtName;
+	static JTextField txtRegistration;
+	static JTextField txtCourse;
+	static JTextField txtCourseTotal;
+	static JTextField txtTrainer;
+	static JTextArea txtDays;
+	static JTextArea txtDescription;
+	static JFrame frame = new JFrame();;
 
 	public static void main(String[] args) {
-		frame = new JFrame();
 
 		new CourseView();
 
@@ -122,13 +121,33 @@ public class CourseView extends JFrame {
 		frame.getContentPane().add(txtDescription);
 
 		JButton btnAddcourse = new JButton("Add Course");
-		btnAddcourse.setBounds(173, 380, 150, 24);
+		btnAddcourse.setBounds(55, 377, 150, 24);
 		frame.getContentPane().add(btnAddcourse);
+
 		btnAddcourse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// System.out.println("Added");
-				addCourse();
+				try {
+					CoursesDAO.deleteCourse(txtName.getText());
+					addCourse();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(268, 377, 117, 25);
+		frame.getContentPane().add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				frame.dispose();
+
 			}
 		});
 
@@ -146,9 +165,17 @@ public class CourseView extends JFrame {
 		addCourseDTO.setCourse_description(txtDescription.getText());
 		addCourseDTO.setFees(Integer.parseInt(txtCourseTotal.getText()));
 		try {
+			CoursesDAO.deleteCourse(txtName.getText());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
 			if (coursesDAO.addCourse(addCourseDTO)) {
 				System.out.println(addCourseDTO);
+
 			}
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -158,6 +185,23 @@ public class CourseView extends JFrame {
 		}
 
 		// TODO Auto-generated method stub
+
+	}
+
+	public static String viewCourse(AddCourseDTO addCourseDTO) {
+
+		txtName.setText(addCourseDTO.getCourse_name());
+		txtDays.setText(String.valueOf(addCourseDTO.getDuration()));
+		txtTrainer.setText(addCourseDTO.getTrainer_name());
+		txtDescription.setText(addCourseDTO.getCourse_description());
+		txtCourseTotal.setText(String.valueOf(addCourseDTO.getFees()));
+
+		String info = "Course Name :" + addCourseDTO.getCourse_name() + "\nFees :"
+				+ String.valueOf(addCourseDTO.getFees()) + "\nDuration :" + String.valueOf(addCourseDTO.getDuration())
+				+ "\nTrainer :" + addCourseDTO.getTrainer_name() + "\nDescription :"
+				+ addCourseDTO.getCourse_description();
+
+		return info;
 
 	}
 }
