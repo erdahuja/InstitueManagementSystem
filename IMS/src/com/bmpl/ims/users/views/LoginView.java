@@ -106,7 +106,7 @@ public class LoginView extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			// logger.error(CommonUtility.getPrintStackTrace(e));
-			 e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 }

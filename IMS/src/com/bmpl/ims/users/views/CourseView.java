@@ -98,10 +98,9 @@ public class CourseView extends JFrame {
 			}
 
 		});
-		
+
 		txtCourseTotal = new JTextField();
 		txtCourseTotal.setBounds(271, 184, 114, 19);
-		
 
 		frame.getContentPane().add(txtCourseTotal);
 		txtCourseTotal.setColumns(10);
@@ -118,7 +117,7 @@ public class CourseView extends JFrame {
 		lblDescription.setBounds(55, 264, 90, 15);
 		frame.getContentPane().add(lblDescription);
 
-		txtDescription= new JTextArea();
+		txtDescription = new JTextArea();
 		txtDescription.setBounds(214, 264, 170, 100);
 		frame.getContentPane().add(txtDescription);
 
@@ -147,8 +146,8 @@ public class CourseView extends JFrame {
 		addCourseDTO.setCourse_description(txtDescription.getText());
 		addCourseDTO.setFees(Integer.parseInt(txtCourseTotal.getText()));
 		try {
-			if(coursesDAO.addCourse(addCourseDTO)){
-			System.out.println(addCourseDTO);
+			if (coursesDAO.addCourse(addCourseDTO)) {
+				System.out.println(addCourseDTO);
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -157,7 +156,7 @@ public class CourseView extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		// TODO Auto-generated method stub
 
 	}

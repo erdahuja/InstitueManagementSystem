@@ -4,12 +4,11 @@ import javax.swing.JFrame;
 
 public class WelcomeView extends JFrame {
 
-	
 	public static void main(String[] args) {
-		
-					WelcomeView frame = new WelcomeView();
-					frame.setVisible(true);
-				
+
+		WelcomeView frame = new WelcomeView();
+		frame.setVisible(true);
+
 	}
 
 	/**
