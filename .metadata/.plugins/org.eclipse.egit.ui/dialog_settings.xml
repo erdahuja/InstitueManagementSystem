@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="GitCommitMessageComponent">
+		<list key="/home/deepak/WorkspaceForProject/.git">
+			<item value="false"/>
+			<item value="erdahuja &lt;er.d.ahuja@gmail.com&gt;"/>
+			<item value="CourseView added."/>
+			<item value="erdahuja &lt;er.d.ahuja@gmail.com&gt;"/>
+			<item value="0000000000000000000000000000000000000000"/>
+		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
+		<item value="815,173" key="STAGING_SASH_FORM_WEIGHT"/>
+		<item value="false" key="sortItemState"/>
+		<item value="200,200" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
+	</section>
+</section>

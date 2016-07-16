@@ -1,0 +1,51 @@
+package com.bmpl.ims.users.views;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JList;
+import javax.swing.JLabel;
+import javax.swing.JScrollBar;
+
+public class UpdateDeleteCourse extends JFrame {
+
+	private JPanel contentPane;
+
+	public static void main(String[] args) {
+	
+					UpdateDeleteCourse frame = new UpdateDeleteCourse();
+					frame.setVisible(true);
+				
+	}
+
+	
+	public UpdateDeleteCourse() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		JList courseList = new JList();
+		courseList.setBounds(22, 57, 138, 177);
+		contentPane.add(courseList);
+		
+		JLabel lblCourses = new JLabel("Courses");
+		lblCourses.setBounds(41, 23, 70, 15);
+		contentPane.add(lblCourses);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(161, 57, 17, 177);
+		
+		contentPane.add(scrollBar);
+		
+		
+		
+		
+		
+	}
+}
