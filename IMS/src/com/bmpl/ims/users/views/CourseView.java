@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -131,8 +132,12 @@ public class CourseView extends JFrame {
 				try {
 					CoursesDAO.deleteCourse(txtName.getText());
 					addCourse();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+					frame.setVisible(false);
+					frame.dispose();
+					JOptionPane.showMessageDialog(null, "Course Added "+txtName.getText());
+					
+				}catch(Exception e1)// TODO Auto-generated catch block
+				{
 					e1.printStackTrace();
 				}
 
@@ -143,7 +148,6 @@ public class CourseView extends JFrame {
 		btnCancel.setBounds(268, 377, 117, 25);
 		frame.getContentPane().add(btnCancel);
 		btnCancel.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				frame.dispose();
@@ -159,20 +163,16 @@ public class CourseView extends JFrame {
 
 		CoursesDAO coursesDAO = new CoursesDAO();
 		AddCourseDTO addCourseDTO = new AddCourseDTO();
-		addCourseDTO.setCourse_name(txtName.getText());
-		addCourseDTO.setDuration(Integer.parseInt(txtDays.getText()));
-		addCourseDTO.setTrainer_name(txtTrainer.getText());
+		addCourseDTO.setCourse_name(txtName.getText().toUpperCase());
+		addCourseDTO.setDuration(Integer.parseInt(txtDays.getText().trim()));
+		addCourseDTO.setTrainer_name(txtTrainer.getText().toUpperCase());
 		addCourseDTO.setCourse_description(txtDescription.getText());
-		addCourseDTO.setFees(Integer.parseInt(txtCourseTotal.getText()));
-		try {
-			CoursesDAO.deleteCourse(txtName.getText());
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		addCourseDTO.setFees(Integer.parseInt(txtCourseTotal.getText().trim()));
+	
 		try {
 			if (coursesDAO.addCourse(addCourseDTO)) {
 				System.out.println(addCourseDTO);
+				
 
 			}
 

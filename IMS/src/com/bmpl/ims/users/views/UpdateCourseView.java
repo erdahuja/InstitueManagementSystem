@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import com.bmpl.ims.users.dao.CoursesDAO;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class UpdateCourseView extends JFrame {
 
@@ -44,12 +46,35 @@ public class UpdateCourseView extends JFrame {
 		JList<String> courseList = new JList<String>(listModel);
 		courseList.setValueIsAdjusting(true);
 		courseList.setBounds(22, 57, 138, 177);
+		courseList.addListSelectionListener(new ListSelectionListener(){
+			CoursesDAO coursesDAO = new CoursesDAO();
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				
+				textUpdateArea.setVisible(true);
+				lblCou.setVisible(true);
+				textUpdateArea.setText("");
+				try {
+					textUpdateArea.setText(CoursesDAO.showCourse(courseList.getSelectedValue()).toString());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
+				
+		});
+		
+		
 
 		JButton btnCourses = new JButton("View Courses");
 		btnCourses.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				listModel.clear();
 				bringCourses();
+				
 
 			}
 		});
@@ -66,8 +91,19 @@ public class UpdateCourseView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String item = courseList.getSelectedValue();
+				if(item!=null){
 				System.out.println("item is :" + item);
 				update(item);
+				
+				lblCou.setVisible(false);
+				textUpdateArea.setVisible(false);
+				 bringCourses();
+				
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No course Selected");
+				}
 
 			}
 		});
@@ -78,16 +114,26 @@ public class UpdateCourseView extends JFrame {
 		btnDelete.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				String item = courseList.getSelectedValue();
+				if(item!=null){
+				
+				
 				int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (response == JOptionPane.NO_OPTION) {
 					System.out.println("No button clicked");
 				} else if (response == JOptionPane.YES_OPTION) {
 					System.out.println("Yes button clicked");
-					String item = courseList.getSelectedValue();
+					
+					
 					deleteItem(item);
+					 bringCourses();
 				} else if (response == JOptionPane.CLOSED_OPTION) {
 					System.out.println("JOptionPane closed");
+				}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "No course Selected");
 				}
 
 			}
@@ -117,7 +163,6 @@ public class UpdateCourseView extends JFrame {
 			textUpdateArea.setText(coursesDAO.updateCourse(item));
 			lblCou.setVisible(true);
 			textUpdateArea.setVisible(true);
-
 			System.out.println(coursesDAO.showCourse(item));
 
 		} catch (SQLException e) {
@@ -141,6 +186,8 @@ public class UpdateCourseView extends JFrame {
 					lblCou.setVisible(true);
 					JOptionPane.showMessageDialog(this, "Course Deleted " + item);
 					System.out.println("course deleted :" + item);
+					textUpdateArea.setVisible(false);
+					lblCou.setVisible(false);
 
 				}
 			} else {
