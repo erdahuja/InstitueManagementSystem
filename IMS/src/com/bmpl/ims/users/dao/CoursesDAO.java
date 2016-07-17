@@ -118,7 +118,7 @@ public class CoursesDAO {
 
 	}
 
-	public ArrayList<String> showCourse(String item) throws SQLException {
+	public static ArrayList<String> showCourse(String item) throws SQLException {
 		boolean coursesShown = false;
 		String sql = CommonSQLConstants.CHOOSECOURSE_SQL;
 		Connection con = null;
