@@ -157,34 +157,6 @@ public class CoursesDAO {
 
 	}
 
-	public ArrayList<String> getCourse() throws SQLException {
-		boolean coursesShown = false;
-		String sql = CommonSQLConstants.VIEWCOURSE_SQL;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs;
-		ArrayList<String> list = new ArrayList<String>();
-		try {
-			con = CommonDAO.getConnection();
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-
-				list.add(rs.getString("course_name"));
-
-				coursesShown = true;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			coursesShown = false;
-
-		} finally {
-			con.close();
-		}
-		return list;
-
-	}
 
 }
