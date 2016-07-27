@@ -134,9 +134,10 @@ public class CourseView extends JFrame {
 					addCourse();
 					frame.setVisible(false);
 					frame.dispose();
-					JOptionPane.showMessageDialog(null, "Course Added "+txtName.getText());
-					
-				}catch(Exception e1)// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Course Added " + txtName.getText());
+					// UpdateCourseView.bringCourses();
+
+				} catch (Exception e1)// TODO Auto-generated catch block
 				{
 					e1.printStackTrace();
 				}
@@ -168,11 +169,10 @@ public class CourseView extends JFrame {
 		addCourseDTO.setTrainer_name(txtTrainer.getText().toUpperCase());
 		addCourseDTO.setCourse_description(txtDescription.getText());
 		addCourseDTO.setFees(Integer.parseInt(txtCourseTotal.getText().trim()));
-	
+
 		try {
 			if (coursesDAO.addCourse(addCourseDTO)) {
 				System.out.println(addCourseDTO);
-				
 
 			}
 

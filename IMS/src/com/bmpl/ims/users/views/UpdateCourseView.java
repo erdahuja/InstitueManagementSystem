@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.bmpl.ims.common.utils.CommonMethods;
 import com.bmpl.ims.users.dao.CoursesDAO;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -23,9 +24,9 @@ public class UpdateCourseView extends JFrame {
 
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
-	JTextArea textUpdateArea;
-	JLabel lblCou;
-	DefaultListModel<String> listModel;
+	static JTextArea textUpdateArea;
+	static JLabel lblCou;
+	static DefaultListModel<String> listModel;
 
 	public static void main(String[] args) {
 
@@ -46,27 +47,30 @@ public class UpdateCourseView extends JFrame {
 		JList<String> courseList = new JList<String>(listModel);
 		courseList.setValueIsAdjusting(true);
 		courseList.setBounds(22, 57, 138, 177);
-		courseList.addListSelectionListener(new ListSelectionListener(){
-			CoursesDAO coursesDAO = new CoursesDAO();
+		courseList.addListSelectionListener(new ListSelectionListener() {
+			
+
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				
+
 				textUpdateArea.setVisible(true);
 				lblCou.setVisible(true);
 				textUpdateArea.setText("");
 				try {
+					if (courseList.getSelectedValue() == null) {
+						textUpdateArea.setVisible(false);
+						lblCou.setVisible(false);
+					}
 					textUpdateArea.setText(CoursesDAO.showCourse(courseList.getSelectedValue()).toString());
+
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
+
 			}
-				
+
 		});
-		
-		
 
 		JButton btnCourses = new JButton("View Courses");
 		btnCourses.addActionListener(new ActionListener() {
@@ -74,7 +78,6 @@ public class UpdateCourseView extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				listModel.clear();
 				bringCourses();
-				
 
 			}
 		});
@@ -91,17 +94,17 @@ public class UpdateCourseView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String item = courseList.getSelectedValue();
-				if(item!=null){
-				System.out.println("item is :" + item);
-				update(item);
-				
-				lblCou.setVisible(false);
-				textUpdateArea.setVisible(false);
-				 bringCourses();
-				
-				}
-				else
-				{
+
+				if (item != null) {
+					System.out.println("item is :" + item);
+					update(item);
+					bringCourses();
+					listModel.clear();
+					lblCou.setVisible(false);
+					textUpdateArea.setVisible(false);
+					;
+
+				} else {
 					JOptionPane.showMessageDialog(null, "No course Selected");
 				}
 
@@ -115,24 +118,25 @@ public class UpdateCourseView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String item = courseList.getSelectedValue();
-				if(item!=null){
-				
-				
-				int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
-						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if (response == JOptionPane.NO_OPTION) {
-					System.out.println("No button clicked");
-				} else if (response == JOptionPane.YES_OPTION) {
-					System.out.println("Yes button clicked");
-					
-					
-					deleteItem(item);
-					 bringCourses();
-				} else if (response == JOptionPane.CLOSED_OPTION) {
-					System.out.println("JOptionPane closed");
-				}
-				}
-				else{
+				if (item != null) {
+
+					int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if (response == JOptionPane.NO_OPTION) {
+						System.out.println("No button clicked");
+					} else if (response == JOptionPane.YES_OPTION) {
+						System.out.println("Yes button clicked");
+
+						deleteItem(item);
+						bringCourses();
+						listModel.clear();
+						lblCou.setVisible(false);
+						textUpdateArea.setVisible(false);
+
+					} else if (response == JOptionPane.CLOSED_OPTION) {
+						System.out.println("JOptionPane closed");
+					}
+				} else {
 					JOptionPane.showMessageDialog(null, "No course Selected");
 				}
 
@@ -201,11 +205,10 @@ public class UpdateCourseView extends JFrame {
 
 	}
 
-	private void bringCourses() {
+	public void bringCourses() {
 
-		CoursesDAO coursesDAO = new CoursesDAO();
 		try {
-			ArrayList<String> list = coursesDAO.getCourse();
+			ArrayList<String> list = CommonMethods.getCourse();
 			if (!list.isEmpty()) {
 				for (String name : list) {
 					listModel.addElement(name);
@@ -221,4 +224,5 @@ public class UpdateCourseView extends JFrame {
 		// TODO Auto-generated method stub
 
 	}
+
 }
