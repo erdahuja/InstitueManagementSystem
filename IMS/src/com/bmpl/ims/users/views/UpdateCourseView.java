@@ -102,7 +102,7 @@ public class UpdateCourseView extends JFrame {
 					listModel.clear();
 					lblCou.setVisible(false);
 					textUpdateArea.setVisible(false);
-					;
+					
 
 				} else {
 					JOptionPane.showMessageDialog(null, "No course Selected");
@@ -167,7 +167,7 @@ public class UpdateCourseView extends JFrame {
 			textUpdateArea.setText(coursesDAO.updateCourse(item));
 			lblCou.setVisible(true);
 			textUpdateArea.setVisible(true);
-			System.out.println(coursesDAO.showCourse(item));
+			System.out.println(CoursesDAO.showCourse(item));
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

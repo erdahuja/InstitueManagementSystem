@@ -149,6 +149,7 @@ public class CourseView extends JFrame {
 		btnCancel.setBounds(268, 377, 117, 25);
 		frame.getContentPane().add(btnCancel);
 		btnCancel.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				frame.dispose();
