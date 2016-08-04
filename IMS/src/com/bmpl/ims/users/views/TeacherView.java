@@ -1,4 +1,4 @@
-package com.bmpl.ojas.views;
+package com.bmpl.ims.users.views;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -15,7 +15,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.bmpl.ojas.DAO.TeacherDAO;
+import com.bmpl.ims.users.DAO.TeacherDAO;
 
 public class TeacherView extends JFrame {
 
@@ -213,7 +213,7 @@ public class TeacherView extends JFrame {
 		try {
 
 			teacherDAO.updateCourse(item);
-			//teacherDAO.showCourse(item);
+			//teacherDAO.showCourse();
 			
 			
 

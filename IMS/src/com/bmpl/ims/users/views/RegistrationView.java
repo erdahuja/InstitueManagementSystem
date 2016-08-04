@@ -1,6 +1,8 @@
-package com.bmpl.ojas.views;
+package com.bmpl.ims.users.views;
 
 import java.awt.Component;
+
+
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,8 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.bmpl.ojas.DAO.RegisterDAO;
-import com.bmpl.ojas.DTO.RegisterDTO;
+import com.bmpl.ims.users.DAO.RegisterDAO;
+import com.bmpl.ims.users.DTO.RegisterDTO;
 
 /*
 * @author  Ojaswi Wadhwa
@@ -192,11 +194,11 @@ public class RegistrationView extends JFrame {
 		contentPane.add(lblRegistration);
 	}
 
-	private void doSubmit() {
+	public  void doSubmit() {
 
 		RegisterDAO registerDAO = new RegisterDAO();
 		RegisterDTO registerDTO = new RegisterDTO();
-
+		//String info = null;
 		registerDTO.setName(txtName.getText());
 		registerDTO.setAddress(txtAddress.getText());
 		registerDTO.setState(txtState.getText());
@@ -212,6 +214,7 @@ public class RegistrationView extends JFrame {
 
 			e.printStackTrace();
 		}
+		
 	}
 
 	private void doReset() {

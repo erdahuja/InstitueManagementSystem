@@ -1,6 +1,7 @@
-package com.bmpl.ojas.views;
+package com.bmpl.ims.users.views;
 
 import java.awt.EventQueue;
+
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-import com.bmpl.ojas.DAO.StudentDAO;
+import com.bmpl.ims.users.DAO.StudentDAO;
 
 public class StudentView extends JFrame {
 
