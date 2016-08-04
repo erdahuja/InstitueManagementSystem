@@ -25,6 +25,7 @@ public class StudentView extends JFrame {
 	private JPanel contentPane;
 	private DefaultListModel<String> listModel;
 	private JList<String> list ;
+	RegistrationView registerView = new RegistrationView();
 	
 	/**
 	 * Launch the application.
@@ -123,6 +124,8 @@ public class StudentView extends JFrame {
 		if(item!=null){
 			System.out.println("Selected item "+item);
 			update(item);
+			registerView.setVisible(true);
+			registerView.doSubmit();
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "no student selected");
