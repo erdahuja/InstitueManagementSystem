@@ -1,14 +1,15 @@
-package com.bmpl.ojas.DAO;
+package com.bmpl.ims.users.DAO;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 //import com.bmpl.ims.common.dao.CommonDAO;
-import com.bmpl.ojas.Common.*;
-import com.bmpl.ojas.DTO.StudentDTO;
+import com.bmpl.ims.Common.*;
+import com.bmpl.ims.users.DTO.StudentDTO;
 
 public class StudentDAO {
 	

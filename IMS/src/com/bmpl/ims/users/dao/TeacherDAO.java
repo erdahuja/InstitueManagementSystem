@@ -1,14 +1,15 @@
-package com.bmpl.ojas.DAO;
+package com.bmpl.ims.users.DAO;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 //import com.bmpl.ims.common.dao.CommonDAO;
-import com.bmpl.ojas.Common.*;
-import com.bmpl.ojas.DTO.TeacherDTO;
+import com.bmpl.ims.Common.*;
+import com.bmpl.ims.users.DTO.TeacherDTO;
 
 public class TeacherDAO {
 	
@@ -172,4 +173,35 @@ public static boolean updateCourse(String item) throws SQLException{
 	
 
 }*/
+
+public ArrayList<String> showCourse() throws SQLException {
+	boolean coursesShown = false;
+	String sql = CommonSQLConstants.CHOOSECOURSE_SQL;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs;
+	ArrayList<String> list = new ArrayList<String>();
+	try {
+		con = CommonDAO.getConnection();
+		pstmt = con.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+
+			list.add(rs.getString("name"));
+
+			coursesShown = true;
+		}
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		coursesShown = false;
+
+	} finally {
+		con.close();
+	}
+	return list;
+}
+
 }

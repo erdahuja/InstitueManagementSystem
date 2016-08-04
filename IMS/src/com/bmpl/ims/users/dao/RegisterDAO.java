@@ -1,13 +1,14 @@
-package com.bmpl.ojas.DAO;
+package com.bmpl.ims.users.DAO;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.bmpl.ojas.Common.CommonDAO;
-import com.bmpl.ojas.Common.CommonSQLConstants;
-import com.bmpl.ojas.DTO.RegisterDTO;
+import com.bmpl.ims.Common.CommonDAO;
+import com.bmpl.ims.Common.CommonSQLConstants;
+import com.bmpl.ims.users.DTO.RegisterDTO;
 
 public class RegisterDAO {
 
