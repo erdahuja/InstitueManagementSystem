@@ -118,7 +118,58 @@ public static boolean updateCourse(String item) throws SQLException{
 
 	return isUpdated = true;
 }
+
+/*public static ArrayList<String> showCourse(String item) throws SQLException {
+	boolean coursesShown = false;
+	String sql = CommonSQLConstants.CHOOSECOURSE_SQL;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs;
+	ArrayList<String> list = new ArrayList<String>();
+	try {
+		con = CommonDAO.getConnection();
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, item);
+		pstmt.setString(2, item);
+		pstmt.setString(3, item);
+		pstmt.setString(4, item);
+		pstmt.setString(5, item);
+		pstmt.setString(6, item);
+		pstmt.setString(7, item);
+		
+		
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+
+			list.add(rs.getString(1));
+
+			list.add(rs.getString(2));
+
+			list.add(rs.getString(3));
+
+			list.add(rs.getString(4));
+
+			list.add(rs.getString(5));
+			list.add(rs.getString(6));
+			list.add(rs.getString(7));
+
+			coursesShown = true;
+		
+
+	}
+	}catch (Exception e) {
+		e.printStackTrace();
+		coursesShown = false;
+
+	} finally {
+		con.close();
+	}
+	return list;
+
+
 	
 	
 
+}*/
 }
