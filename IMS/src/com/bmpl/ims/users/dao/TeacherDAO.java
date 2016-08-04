@@ -15,7 +15,7 @@ public class TeacherDAO {
 	
 	public boolean addTutor(TeacherDTO teacherDTO) throws SQLException{
 		boolean tutorAdded = false;
-		String sql = CommonSQLConstants.ADDTUTOR_SQL;
+		String sql = CommonSQLConstants.ADDSTUDENT_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int rs;
@@ -40,7 +40,7 @@ public class TeacherDAO {
 	}
 	public ArrayList<String> getCourse() throws SQLException {
 		boolean coursesShown = false;
-		String sql = CommonSQLConstants.VIEWCOURSE_SQL;
+		String sql = CommonSQLConstants.VIEWSTUDENT_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs;
@@ -70,7 +70,7 @@ public class TeacherDAO {
 	
 public boolean deleteCourse(String item) throws SQLException{
 	boolean isDeleted = false;
-	String sql = CommonSQLConstants.DELETECOURSE_SQL;
+	String sql = CommonSQLConstants.DELETESTUDENT_SQL;
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -95,7 +95,7 @@ public boolean deleteCourse(String item) throws SQLException{
 
 public static boolean updateCourse(String item) throws SQLException{
 	boolean isUpdated = false;
-	String sql = CommonSQLConstants.UPDATECOURSE_SQL;
+	String sql = CommonSQLConstants.UPDATESTUDENT_SQL;
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -174,7 +174,7 @@ public static boolean updateCourse(String item) throws SQLException{
 
 }*/
 
-public ArrayList<String> showCourse() throws SQLException {
+/*public ArrayList<String> showCourse() throws SQLException {
 	boolean coursesShown = false;
 	String sql = CommonSQLConstants.CHOOSECOURSE_SQL;
 	Connection con = null;
@@ -202,6 +202,6 @@ public ArrayList<String> showCourse() throws SQLException {
 		con.close();
 	}
 	return list;
-}
+}*/
 
 }
