@@ -12,6 +12,17 @@ public interface CommonSQLConstants {
 	public static String VIEWBATCHES_SQL = "";
 	public static String VIEWSTUDENTS_SQL="";
 	public static String TAKEATTENDANCE_SQL = "";
+	public static String Trainer_Registration_SQl = "INSERT INTO trainer_registration"+
+			"("+
+			"trainer_name,"
+			+"trainer_age,"
+			+"trainer_gender,"
+			+"trainer_mobileno,"
+			+"trainer_address,"
+			+"trainer_email,"
+			+"trainer_subject,"
+			+"trainer_image)"
+			+"VALUES(?,?,?,?,?,?,?,?)";
 	
 	
 }
