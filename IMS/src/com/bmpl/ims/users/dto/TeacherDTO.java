@@ -1,4 +1,4 @@
-package com.bmpl.ojas.DTO;
+package com.bmpl.ims.users.DTO;
 
 public class TeacherDTO {
 	
