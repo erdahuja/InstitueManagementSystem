@@ -13,7 +13,8 @@ public static String LOGIN_SQL = "select user_master.`userid`,"
 + " right_master.`rightid`=role_right_mapping.`rightid`";
 
 public static String ADDBATCH_SQL="Insert into batch_table (batchname, coursename, trainername, totalsets, description, batch_starts) Values (?,?,?,?,?,?)";
-public static String LOGIN_SQL2="select username,password from user_table where username=? and password=?";
+public static String LOGIN_SQLAdmin="select username,password from user_table where username=? and password=?";
+public static String LOGIN_SQLCounselor="select username,password from counselor_table where username=? and password=?";
 public static String GETCOURSE_SQL="select * from course_table";
 
 		public static String ADDCOURSE_SQL = "INSERT INTO `InstituteProject`.`courses_table`(`course_name`,`fees`,`course_description`,`duration`,`trainer_name`) VALUES(?,?,?,?,?)";
