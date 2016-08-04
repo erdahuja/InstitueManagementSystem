@@ -93,7 +93,6 @@ public class LoginPageView extends JFrame {
 		comboBox.setBounds(221, 86, 119, 25);
 		getContentPane().add(comboBox);
 		comboBox.addItem("Admin");
-		comboBox.addItem("Student");
 		comboBox.addItem("Faculty");		
 		
 		JLabel lblPleaseSelect = new JLabel("Please Select");
@@ -109,35 +108,47 @@ public class LoginPageView extends JFrame {
 			userDTO.setUserid(txtuser.getText());
 			userDTO.setPassword(txtpassword.getText());
 			userDTO.setRole(selecteditem);
-					try {
-						boolean isFound = loginDAO.authenticateUser(userDTO);
+			userDTO.setRole(selecteditem);
+			if(selecteditem.equalsIgnoreCase("admin"))
+			{		
+			try {
+						boolean isFound = loginDAO.authenticateAdmin(userDTO);
 						if(isFound)
 						{
-							if(userDTO.getRole().equalsIgnoreCase("admin"))
-							{
-								JOptionPane.showMessageDialog(this, "Admin selected");
-							}
-							if(userDTO.getRole().equalsIgnoreCase("student"))
-							{
-								JOptionPane.showMessageDialog(this, "student selected");
-							}
-							if(userDTO.getRole().equalsIgnoreCase("faculty"))
-							{
-								JOptionPane.showMessageDialog(this, "faculty selected");
-							}
+							JOptionPane.showMessageDialog(this, "Admin");
 						}
 				else
 				{
 					JOptionPane.showMessageDialog(this, "Invalid Userid or Password");
 				}
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 	 }
+			else
+	 {
+		 boolean isFound=false;
+		try {
+			isFound = loginDAO.authenticateCounselor(userDTO);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 if(isFound)
+			{
+			 JOptionPane.showMessageDialog(this, "Counselor");
+			}
+		 else
+			{
+				JOptionPane.showMessageDialog(this, "Invalid Userid or Password");
+			}
+	 }
+	 }
+	 
+	 
 	 public void Reset()
 	 {
 		 txtuser.setText("");
