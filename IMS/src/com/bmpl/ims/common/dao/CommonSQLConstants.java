@@ -15,4 +15,16 @@ public static String LOGIN_SQL = "select user_master.`userid`,"
 public static String ADDBATCH_SQL="Insert into batch_table (batchname, coursename, trainername, totalsets, description, batch_starts) Values (?,?,?,?,?,?)";
 public static String LOGIN_SQL2="select username,password from user_table where username=? and password=?";
 public static String GETCOURSE_SQL="select * from course_table";
+
+		public static String ADDCOURSE_SQL = "INSERT INTO `InstituteProject`.`courses_table`(`course_name`,`fees`,`course_description`,`duration`,`trainer_name`) VALUES(?,?,?,?,?)";
+	public static String VIEWCOURSE_SQL = "SELECT `course_name` FROM `InstituteProject`.`courses_table`";
+	public static String CHOOSECOURSE_SQL = "SELECT * FROM `InstituteProject`.`courses_table` where course_name=? ";
+
+	public static String DELETECOURSE_SQL = "DELETE FROM `InstituteProject`.`courses_table` WHERE course_name=?";
+
+	public static String UPDATECOURSE_SQL = "UPDATE `InstituteProject`.`courses_table` SET 'course_name` = ?,`fees` = ?,`course_description` = ?,`duration` = ?,`trainer_name` = ? WHERE `course_name` = ?";
+	public static String VIEWBATCHES_SQL = "";
+	public static String VIEWSTUDENTS_SQL="";
+	public static String TAKEATTENDANCE_SQL = "";
+	
 }
