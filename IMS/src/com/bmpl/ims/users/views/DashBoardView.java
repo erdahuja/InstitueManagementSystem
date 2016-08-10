@@ -1,15 +1,27 @@
 package com.bmpl.ims.users.views;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 class Item {
 	private String className;
@@ -33,8 +45,6 @@ class Item {
 	public String toString() {
 		return showName;
 	}
-	
-	
 }
 
 public class DashBoardView extends JFrame {
@@ -44,41 +54,51 @@ public class DashBoardView extends JFrame {
 	private Vector model2;
 	private Vector model3;
 	private Vector model4;
+	DateFormat format;
+	String stringTime;
+	String misc;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		DashBoardView frame = new DashBoardView();
-		frame.setVisible(true);
 
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+		frame.setTitle("Institue Management System");
+
+		frame.setVisible(true);
 	}
 
-	public DashBoardView() {
-		
+	public DashBoardView() throws IOException {
+		Image img = ImageIO.read(new File("/home/deepak/Downloads/IMS/banner_CMS.jpg"));
+		// format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
+
 		setContentPane(contentPane);
 
 		JLabel lblAdd = new JLabel("ADD");
-		lblAdd.setBounds(111, 139, 70, 15);
+		lblAdd.setBounds(111, 273, 70, 15);
 		contentPane.add(lblAdd);
 
 		JLabel lblUpdate = new JLabel("Update");
-		lblUpdate.setBounds(111, 222, 70, 15);
+		lblUpdate.setBounds(111, 347, 70, 15);
 		contentPane.add(lblUpdate);
 
 		JLabel lblAttendance = new JLabel("Attendance");
-		lblAttendance.setBounds(111, 300, 114, 15);
+		lblAttendance.setBounds(111, 427, 114, 15);
 		contentPane.add(lblAttendance);
 
 		JLabel lblFees = new JLabel("Fees");
-		lblFees.setBounds(111, 395, 70, 15);
+		lblFees.setBounds(111, 488, 70, 15);
 		contentPane.add(lblFees);
 
 		JLabel lblFollowup = new JLabel("Follow Ups");
-		lblFollowup.setBounds(111, 495, 114, 15);
+		lblFollowup.setBounds(111, 545, 114, 15);
 		contentPane.add(lblFollowup);
 
 		model1 = new Vector();
@@ -88,50 +108,46 @@ public class DashBoardView extends JFrame {
 		model1.addElement(new Item("AddBatchView", "Batch"));
 
 		JComboBox comboBox = new JComboBox(model1);
-		
-		comboBox.setBounds(285, 134, 124, 24);
+
+		comboBox.setBounds(299, 268, 124, 24);
 
 		contentPane.add(comboBox);
 
 		model2 = new Vector();
 		model2.addElement(new Item("UpdateCourseView", "Course"));
-		model2.addElement(new Item("StudentView", "Student"));//Change key after adding screens
+		model2.addElement(new Item("StudentView", "Student"));// Change key
+																// after adding
+																// screens
 		model2.addElement(new Item("AddBatchView", "Trainer"));
 		model2.addElement(new Item("AddBatchView", "Batch"));
-		
+
 		JComboBox comboBox_1 = new JComboBox(model2);
-		comboBox_1.setBounds(285, 217, 124, 24);
-		
+		comboBox_1.setBounds(299, 342, 124, 24);
 
 		contentPane.add(comboBox_1);
 
-		model3=new Vector();
+		model3 = new Vector();
 		model3.addElement(new Item("TakeAttendanceView", "Take Attendance"));
 		model3.addElement(new Item("AddBatchView", "View Attendance"));
-		
+
 		JComboBox comboBox_2 = new JComboBox(model3);
-		comboBox_2.setBounds(285, 295, 124, 24);
+		comboBox_2.setBounds(299, 406, 124, 24);
 		contentPane.add(comboBox_2);
 
 		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(285, 390, 140, 24);
+		comboBox_3.setBounds(299, 480, 124, 24);
 		contentPane.add(comboBox_3);
-
-		JLabel lblChooseAnOp = new JLabel("Choose an Operation");
-		lblChooseAnOp.setBounds(285, 65, 240, 37);
-		contentPane.add(lblChooseAnOp);
 
 		JButton btnGo = new JButton("Go");
 		btnGo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Item item=(Item)comboBox.getSelectedItem();
+				Item item = (Item) comboBox.getSelectedItem();
 				System.out.println(item.getClassName());
-				
-				
+
 				try {
-					Class.forName("com.bmpl.ims.users.views."+item.getClassName()).newInstance();
-					
+					Class.forName("com.bmpl.ims.users.views." + item.getClassName()).newInstance();
+
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -145,25 +161,45 @@ public class DashBoardView extends JFrame {
 
 			}
 		});
-		
-		btnGo.setBounds(458, 134, 117, 25);
+
+		btnGo.setBounds(526, 268, 117, 25);
 		contentPane.add(btnGo);
 
-		JLabel lblWelcome = new JLabel("Welcome");
-		lblWelcome.setBounds(728, 23, 70, 15);
+		misc = "Welcome " + "Deepak" + "\n" + "Logged in as " + " " + "\n" + "Time : ";
+		JTextArea lblWelcome = new JTextArea(misc + stringTime);
+		lblWelcome.setFont(new Font("DejaVu Serif Condensed", Font.BOLD, 14));
+		lblWelcome.setBorder(BorderFactory.createEmptyBorder());
+		lblWelcome.setLineWrap(true);
+		lblWelcome.setEditable(false);
+
+		lblWelcome.setBounds(1032, 134, 250, 77);
 		contentPane.add(lblWelcome);
-		
+
+		javax.swing.Timer t = new javax.swing.Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Calendar now = Calendar.getInstance();
+				int h = now.get(Calendar.HOUR_OF_DAY);
+				int m = now.get(Calendar.MINUTE);
+				int s = now.get(Calendar.SECOND);
+				int d = now.get(Calendar.DAY_OF_MONTH);
+				int mo = now.get(Calendar.MONTH);
+				int y = now.get(Calendar.YEAR);
+				lblWelcome.setText(misc + " " + h + " :" + m + " :" + s + "\n" + "Date : " + d + " :" + mo + " :" + y);
+
+			}
+		});
+		t.start();
+
 		JButton button = new JButton("Go");
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Item item=(Item)comboBox_1.getSelectedItem();
+				Item item = (Item) comboBox_1.getSelectedItem();
 				System.out.println(item.getClassName());
-				
-				
+
 				try {
-					Class.forName("com.bmpl.ims.users.views."+item.getClassName()).newInstance();
-					
+					Class.forName("com.bmpl.ims.users.views." + item.getClassName()).newInstance();
+
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -177,20 +213,19 @@ public class DashBoardView extends JFrame {
 
 			}
 		});
-		button.setBounds(458, 217, 117, 25);
+		button.setBounds(526, 342, 117, 25);
 		contentPane.add(button);
-		
+
 		JButton button_1 = new JButton("Go");
 		button_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Item item=(Item)comboBox_2.getSelectedItem();
+				Item item = (Item) comboBox_2.getSelectedItem();
 				System.out.println(item.getClassName());
-				
-				
+
 				try {
-					Class.forName("com.bmpl.ims.users.views."+item.getClassName()).newInstance();
-					
+					Class.forName("com.bmpl.ims.users.views." + item.getClassName()).newInstance();
+
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -204,20 +239,19 @@ public class DashBoardView extends JFrame {
 
 			}
 		});
-		button_1.setBounds(458, 295, 117, 25);
+		button_1.setBounds(526, 406, 117, 25);
 		contentPane.add(button_1);
-		
+
 		JButton button_2 = new JButton("Go");
 		button_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Item item=(Item)comboBox_3.getSelectedItem();
+				Item item = (Item) comboBox_3.getSelectedItem();
 				System.out.println(item.getClassName());
-				
-				
+
 				try {
-					Class.forName("com.bmpl.ims.users.views."+item.getClassName()).newInstance();
-					
+					Class.forName("com.bmpl.ims.users.views." + item.getClassName()).newInstance();
+
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -231,8 +265,13 @@ public class DashBoardView extends JFrame {
 
 			}
 		});
-		button_2.setBounds(458, 390, 117, 25);
+		button_2.setBounds(526, 480, 117, 25);
 		contentPane.add(button_2);
 
+		JLabel lblNewLabel = new JLabel(new ImageIcon(img));
+		lblNewLabel.setBounds(0, 12, 1031, 254);
+		contentPane.add(lblNewLabel);
+
 	}
+
 }
