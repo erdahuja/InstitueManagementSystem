@@ -57,11 +57,8 @@ public class EnquireView extends JFrame {
 	private JTextField txtFriendOrOther;
 	private JTextField txtEnterEmail;
 	private String course[]={"Java", "Adv. Java", "UI", "MEAN", "C", "C++", "Php"};
-	public DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	java.sql.Date date;
 	DefaultListModel<String> listModel;
 	JTextArea textUpdateArea;
-	//private Jlist String list;
 	
 	/**
 	 * Launch the application.
@@ -302,13 +299,23 @@ public class EnquireView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				addEnquiry();
-				//setDateTime();
+				getCurrentTimeStamp();
+				EnquireView.this.setVisible(false);
+				EnquireView.this.dispose();
+				EnquireContactMe enquireContactMe = new EnquireContactMe();
+				enquireContactMe.setVisible(true);
+				
 			}
 			
 		});
 		
 	}
 	
+	public static java.sql.Timestamp getCurrentTimeStamp() {
+
+		java.util.Date today = new java.util.Date();
+		return new java.sql.Timestamp(today.getTime());
+	}
 
 	private void addEnquiry(){
 		EnquireDAO enquireDAO = new EnquireDAO();
@@ -331,14 +338,6 @@ public class EnquireView extends JFrame {
 		enquireDTO.setQualification(txtEnterYourQualifications.getText());
 		enquireDTO.setReference(txtFriendOrOther.getText());
 		
-		//get time of enquiry
-		Calendar now = Calendar.getInstance();
-		String enquireDateTime = dateFormat.format(now.getTime());
-	    /*long datesql=enquireDateTime;
-		java.sql.Date date=new Date(datesql);
-		*/System.out.println(enquireDateTime);
-	    //date = (Date)enquireDateTime;
-		//date = DateFormat.format(now.getTime());
 	    try {
 			if(enquireDAO.addEnquire(enquireDTO)){
 				System.out.println(enquireDTO);

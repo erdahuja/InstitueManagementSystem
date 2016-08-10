@@ -23,6 +23,10 @@ public interface CommonSQLConstants {
 			+"trainer_subject,"
 			+"trainer_image)"
 			+"VALUES(?,?,?,?,?,?,?,?)";
-	
+	public static String ENQUIRE_SQL = "INSERT INTO `project`.`enquire_sql`"
+			+ "(`firstName`,`secondName`,`address1`,`address2`,`email`,`mobileContact`,`otherContact`,`slot1`,`slot2`,`fatherFirstName`,"
+			+ "`fatherSecondName`,`fatherMobileContact`,`fatherOtherContact`,`university`,`qualification`,`reference`,`EnquireDate`)"
+			+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static String COURSE_SQL="SELECT * from `project`.`course_sql`";	
 	
 }
