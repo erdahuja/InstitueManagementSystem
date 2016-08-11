@@ -313,13 +313,18 @@ public class FeePaymentView extends JFrame {
 		    		  
 					
 						textChequeNum.setVisible(false);
+						lblBankName.setVisible(false);
+						textBankName.setVisible(false);
 					
 						
 					}
 		    	  else{
 		    		  lblChequeNum.setVisible(true);
 		    		  
-		    			textChequeNum.setVisible(true);
+		    			textChequeNum.setVisible(true
+		    			 lblBankName.setVisible(true);
+		    			
+		    			textBankName.setVisible(true);	
 		    	  }
 		      }
 		    });
