@@ -3,8 +3,9 @@ package com.bmpl.counsellorform.DTO;
 public class counsellorDTO {
 	private String name;
 	private String address;
-	private String phonenumber;
+	private String gender;
 	private String qualification;
+	private String phonenumber;
 	public String getName() {
 		return name;
 	}
@@ -17,11 +18,11 @@ public class counsellorDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getPhonenumber() {
-		return phonenumber;
+	public String getGender() {
+		return gender;
 	}
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	public String getQualification() {
 		return qualification;
@@ -29,6 +30,11 @@ public class counsellorDTO {
 	public void setQualification(String qualification) {
 		this.qualification = qualification;
 	}
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
 }
 	
-
