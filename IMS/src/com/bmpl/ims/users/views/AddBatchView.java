@@ -19,11 +19,15 @@ import javax.swing.SwingConstants;
 
 import com.bmpl.ims.users.dao.BatchDAO;
 import com.bmpl.ims.users.dto.BatchDTO;
-import com.toedter.calendar.JDateChooser;
+//import com.toedter.calendar.JDateChooser;
+import com.bmpl.ims.users.dto.CourseDTO;
 
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import java.awt.ScrollPane;
+import java.awt.List;
+import javax.swing.JList;
 
 public class AddBatchView extends JFrame {
 
@@ -36,7 +40,11 @@ public class AddBatchView extends JFrame {
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 	private String selecteditem;
+	private String selecteditem1;
 	private java.sql.Date sqlDate;
+	private JTextField starttime;
+	private JTextField endtime;
+	private JComboBox comboBox1;
 	public static void main(String[] args) {
 	
 					AddBatchView frame = new AddBatchView();
@@ -46,10 +54,9 @@ public class AddBatchView extends JFrame {
 
 		public AddBatchView() {
 		
-		//UserDTO userDto = new UserDTO();
 		setTitle("AddBatch");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 479, 508);
+		setBounds(100, 100, 479, 605);
 		getContentPane().setLayout(null);
 		
 		JLabel lblBatchname = new JLabel("CourseName");
@@ -65,6 +72,7 @@ public class AddBatchView extends JFrame {
 		label.setBounds(52, 60, 101, 27);
 		getContentPane().add(label);
 		
+		
 		JLabel lblTrainername = new JLabel("TotalSets");
 		lblTrainername.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTrainername.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -76,11 +84,18 @@ public class AddBatchView extends JFrame {
 		getContentPane().add(tnr_name);
 		tnr_name.setColumns(10);
 		
+		
 		Bth_name = new JTextField();
 		Bth_name.setColumns(10);
 		Bth_name.setBounds(226, 65, 117, 20);
 		getContentPane().add(Bth_name);
 		
+		comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selecteditem1=(String)comboBox.getSelectedItem();
+			}
+		});
 		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,11 +132,11 @@ public class AddBatchView extends JFrame {
 		JLabel lblDescription = new JLabel("Description");
 		lblDescription.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDescription.setBounds(41, 267, 125, 27);
+		lblDescription.setBounds(43, 366, 125, 27);
 		getContentPane().add(lblDescription);
 		
 		des_area = new JTextArea();
-		des_area.setBounds(226, 270, 117, 122);
+		des_area.setBounds(226, 369, 117, 122);
 		getContentPane().add(des_area);
 		des_area.setLineWrap(true);
 		
@@ -132,7 +147,7 @@ public class AddBatchView extends JFrame {
 			}
 		});
 		btnAddBatch.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnAddBatch.setBounds(73, 435, 127, 23);
+		btnAddBatch.setBounds(61, 532, 127, 23);
 		getContentPane().add(btnAddBatch);
 		
 		JButton btnReset = new JButton("Reset");
@@ -142,7 +157,7 @@ public class AddBatchView extends JFrame {
 			}
 		});
 		btnReset.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnReset.setBounds(229, 435, 127, 23);
+		btnReset.setBounds(230, 532, 127, 23);
 		getContentPane().add(btnReset);
 		
 		JLabel lblBatchtime = new JLabel("Date");
@@ -156,10 +171,31 @@ public class AddBatchView extends JFrame {
 		datePicker = new JDatePickerImpl(datePanel);
 		datePicker.setBounds(226, 220, 117, 20);
 		getContentPane().add(datePicker);
+		
+		JLabel lblStartTime = new JLabel("Start Time");
+		lblStartTime.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblStartTime.setBounds(61, 265, 107, 20);
+		getContentPane().add(lblStartTime);
+		
+		JLabel lblEndTime = new JLabel("End Time");
+		lblEndTime.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblEndTime.setBounds(61, 313, 107, 20);
+		getContentPane().add(lblEndTime);
+		
+		starttime = new JTextField();
+		starttime.setColumns(10);
+		starttime.setBounds(226, 267, 117, 20);
+		getContentPane().add(starttime);
+		
+		endtime = new JTextField();
+		endtime.setColumns(10);
+		endtime.setBounds(226, 315, 117, 20);
+		getContentPane().add(endtime);
 	}
 	
 	public void addbatch()
 	{
+		ArrayList<BatchDTO> arraybatch=new ArrayList<>();
 		BatchDTO batchdto =new BatchDTO();
 		BatchDAO batchdao=new BatchDAO();
 		batchdto.setBatchname(Bth_name.getText());
@@ -171,11 +207,14 @@ public class AddBatchView extends JFrame {
 		Date selectedDate = (Date) datePicker.getModel().getValue();
 		sqlDate=new java.sql.Date(selectedDate.getTime());
 		batchdto.setBatchstartdate(sqlDate);
+		batchdto.setStarttime(starttime.getText());
+		batchdto.setEndtime(endtime.getText());
+		arraybatch.add(batchdto);
 		try {
-			boolean isaddbatch = batchdao.addbatch(batchdto);
+			boolean isaddbatch = batchdao.addbatch(arraybatch);
 			if(isaddbatch)
 			{
-				JOptionPane.showMessageDialog(this, "Batch Created........");
+				JOptionPane.showMessageDialog(this, "Batch Added........");
 			}
 			else
 			{
@@ -194,7 +233,8 @@ public class AddBatchView extends JFrame {
 		tnr_name.setText("");
 		total_set.setText("");
 		des_area.setText("");
+		starttime.setText("");
+		endtime.setText("");
 		
 		}
-	
 	}
