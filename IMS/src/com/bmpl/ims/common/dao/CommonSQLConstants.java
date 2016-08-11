@@ -19,7 +19,7 @@ public interface CommonSQLConstants {
 			+ "`fatherSecondName`,`fatherMobileContact`,`fatherOtherContact`,`university`,`qualification`,`reference`,`EnquireDate`)"
 			+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static String COURSE_SQL="SELECT * from `project`.`course_sql`";	
-	public static String COUNSELLOR_SQL = "INSERT INTO `counsellordb`.`consellorpage`(`Name`,`Address`,`Phonenumber`,`Qualification`)"
-	+ "VALUES(?,?,?,?)";
+	public static String COUNSELLOR_SQL = "INSERT INTO `counsellordb`.`consellorpage`(`Name`,`Address`,`Phonenumber`,`Qualification`,`Gender`)"
+	+ "VALUES(?,?,?,?,?)";
 	
 }
