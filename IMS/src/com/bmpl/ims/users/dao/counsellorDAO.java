@@ -22,6 +22,7 @@ try {
 		pstmt.setString(2,counsellorDTO.getAddress());
 		pstmt.setString(3,counsellorDTO.getPhonenumber());
 		pstmt.setString(4,counsellorDTO.getQualification());
+		pstmt.setString(5,counsellorDTO.getGender());
 		rs = pstmt.executeUpdate();
 		if(rs>0)
 		{
