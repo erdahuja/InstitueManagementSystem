@@ -1,69 +1,85 @@
 package com.bmpl.ims.users.dto;
 
+import java.util.Date;
+
 public class TrainerDTO {
 
-	private String trainer_name;
-	private int trainer_age;
-	private String trainer_gender;
-	private String trainer_address;
-	private String trainer_mobileno;
-	private String trainer_email;
-	private String trainer_subject;
-	private String trainer_image;
-	public String getTrainer_name() {
-		return trainer_name;
+	private String Trainer_Name;
+	private int Trainer_Age;
+	private String Trainer_Gender;
+	private String Trainer_Address;
+	private String Trainer_Mobileno;
+	private String Trainer_Email;
+	private String Trainer_Subject;
+	private String Trainer_Image;
+	private Date Trainer_Hire_Date;
+	private int id;
+	public int getId() {
+		return id;
 	}
-	public void setTrainer_name(String trainer_name) {
-		this.trainer_name = trainer_name;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getTrainer_age() {
-		return trainer_age;
+	public String getTrainer_Name() {
+		return Trainer_Name;
 	}
-	public void setTrainer_age(int trainer_age) {
-		this.trainer_age = trainer_age;
+	public void setTrainer_Name(String trainer_Name) {
+		Trainer_Name = trainer_Name;
 	}
-	public String getTrainer_gender() {
-		return trainer_gender;
+	public int getTrainer_Age() {
+		return Trainer_Age;
 	}
-	public void setTrainer_gender(String trainer_gender) {
-		this.trainer_gender = trainer_gender;
+	public void setTrainer_Age(int trainer_Age) {
+		Trainer_Age = trainer_Age;
 	}
-	public String getTrainer_address() {
-		return trainer_address;
+	public String getTrainer_Gender() {
+		return Trainer_Gender;
 	}
-	public void setTrainer_address(String trainer_address) {
-		this.trainer_address = trainer_address;
+	public void setTrainer_Gender(String trainer_Gender) {
+		Trainer_Gender = trainer_Gender;
 	}
-	public String getTrainer_mobileno() {
-		return trainer_mobileno;
+	public String getTrainer_Address() {
+		return Trainer_Address;
 	}
-	public void setTrainer_mobileno(String trainer_mobileno) {
-		this.trainer_mobileno = trainer_mobileno;
+	public void setTrainer_Address(String trainer_Address) {
+		Trainer_Address = trainer_Address;
 	}
-	public String getTrainer_email() {
-		return trainer_email;
+	public String getTrainer_Mobileno() {
+		return Trainer_Mobileno;
 	}
-	public void setTrainer_email(String trainer_email) {
-		this.trainer_email = trainer_email;
+	public void setTrainer_Mobileno(String trainer_Mobileno) {
+		Trainer_Mobileno = trainer_Mobileno;
 	}
-	public String getTrainer_subject() {
-		return trainer_subject;
+	public String getTrainer_Email() {
+		return Trainer_Email;
 	}
-	public void setTrainer_subject(String trainer_subject) {
-		this.trainer_subject = trainer_subject;
+	public void setTrainer_Email(String trainer_Email) {
+		Trainer_Email = trainer_Email;
 	}
-	public String getTrainer_image() {
-		return trainer_image;
+	public String getTrainer_Subject() {
+		return Trainer_Subject;
 	}
-	public void setTrainer_image(String trainer_image) {
-		this.trainer_image = trainer_image;
+	public void setTrainer_Subject(String trainer_Subject) {
+		Trainer_Subject = trainer_Subject;
+	}
+	public String getTrainer_Image() {
+		return Trainer_Image;
+	}
+	public void setTrainer_Image(String trainer_Image) {
+		Trainer_Image = trainer_Image;
+	}
+	public Date getTrainer_Hire_Date() {
+		return Trainer_Hire_Date;
+	}
+	public void setTrainer_Hire_Date(Date trainer_Hire_Date) {
+		Trainer_Hire_Date = trainer_Hire_Date;
 	}
 	@Override
 	public String toString() {
-		return "TrainerDTO [trainer_name=" + trainer_name + ", trainer_age=" + trainer_age + ", trainer_gender="
-				+ trainer_gender + ", trainer_address=" + trainer_address + ", trainer_mobileno=" + trainer_mobileno
-				+ ", trainer_email=" + trainer_email + ", trainer_subject=" + trainer_subject + ", trainer_image="
-				+ trainer_image + "]";
+		return "TrainerDTO [Trainer_Name=" + Trainer_Name + ", Trainer_Age=" + Trainer_Age + ", Trainer_Gender="
+				+ Trainer_Gender + ", Trainer_Address=" + Trainer_Address + ", Trainer_Mobileno=" + Trainer_Mobileno
+				+ ", Trainer_Email=" + Trainer_Email + ", Trainer_Subject=" + Trainer_Subject + ", Trainer_Image="
+				+ Trainer_Image + ", Trainer_Hire_Date=" + Trainer_Hire_Date + ", id=" + id + "]";
 	}
 	
 	
