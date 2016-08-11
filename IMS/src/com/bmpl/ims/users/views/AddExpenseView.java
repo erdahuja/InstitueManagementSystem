@@ -1,23 +1,21 @@
 package com.bmpl.ims.users.views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Date;
 
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.bmpl.ims.common.utils.CommonUtility;
 import com.bmpl.ims.users.dao.AddExpenseDAO;
 import com.bmpl.ims.users.dto.AddExpenseDTO;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class AddExpenseView extends JFrame {
 
@@ -122,14 +120,51 @@ public class AddExpenseView extends JFrame {
 		JButton btnTotalExpense = new JButton("TOTAL");
 		btnTotalExpense.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int capt_lease=Integer.parseInt(textCapitalLeaseCost.getText());
-				int advert=Integer.parseInt(textAdvertisingCost.getText());
-				int broadbnd=Integer.parseInt(textBroadbandCost.getText());
-				int staff_sal=Integer.parseInt(textStaffSalaryCost.getText());
-				int maintain=Integer.parseInt(textMaintainanceCost.getText());
-				int miscellaneous=Integer.parseInt(textMiscellaneous.getText());
-				int sum=capt_lease+advert+broadbnd+staff_sal+ maintain+miscellaneous;
-				textTotal.setText(String.valueOf(sum));
+				int capt_lease,advert,broadbnd,staff_sal,maintain,miscellaneous;
+				int sum;
+				if(textCapitalLeaseCost.getText().trim().equals("")){
+					textCapitalLeaseCost.setText("0");
+				
+					
+				}
+				if(textAdvertisingCost.getText().trim().equals("")){
+					textAdvertisingCost.setText("0");
+					
+				}
+				if(textBroadbandCost.getText().trim().equals("")){
+					textBroadbandCost.setText("0");
+					
+				}
+				if(textStaffSalaryCost.getText().trim().equals("")){
+					textStaffSalaryCost.setText("0");
+					
+				}
+				if(textMaintainanceCost.getText().trim().equals("")){
+					textMaintainanceCost.setText("0");
+					
+				}
+				if(textMiscellaneous.getText().trim().equals("")){
+					textMiscellaneous.setText("0");
+					
+				}
+				
+					    capt_lease=Integer.parseInt(textCapitalLeaseCost.getText());
+			
+				
+						advert=Integer.parseInt(textAdvertisingCost.getText());
+			
+						broadbnd=Integer.parseInt(textBroadbandCost.getText());
+				
+						staff_sal=Integer.parseInt(textStaffSalaryCost.getText());
+				 
+						maintain=Integer.parseInt(textMaintainanceCost.getText());
+			
+						miscellaneous=Integer.parseInt(textMiscellaneous.getText());
+				 sum=capt_lease+advert+broadbnd+staff_sal+ maintain+miscellaneous;
+				 
+			String balance=	 CommonUtility.getBalance(String.valueOf(sum));
+			System.out.println(balance);
+			textTotal.setText(String.valueOf(sum));
 				
 			}
 		});
@@ -141,6 +176,9 @@ public class AddExpenseView extends JFrame {
 		btnAddExpense.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				addExpense();
+				Date d=new Date();
+				System.out.println(d);
+				
 			}
 		});
 		btnAddExpense.setFont(new Font("Tahoma", Font.PLAIN, 13));
