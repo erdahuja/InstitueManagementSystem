@@ -12,17 +12,8 @@ public interface CommonSQLConstants {
 	public static String VIEWBATCHES_SQL = "";
 	public static String VIEWSTUDENTS_SQL="";
 	public static String TAKEATTENDANCE_SQL = "";
-	public static String Trainer_Registration_SQl = "INSERT INTO trainer_registration"+
-			"("+
-			"trainer_name,"
-			+"trainer_age,"
-			+"trainer_gender,"
-			+"trainer_mobileno,"
-			+"trainer_address,"
-			+"trainer_email,"
-			+"trainer_subject,"
-			+"trainer_image)"
-			+"VALUES(?,?,?,?,?,?,?,?)";
+	public static String Trainer_Registration_SQl = "INSERT INTO `amit`.`trainer_registration` (`Trainer_name`, `Trainer_age`, `Trainer_gender`, `Trainer_mobileno`, `Trainer_email`, `Trainer_address`, `Trainer_image`, `Trainer_subject`, `Trainer_hiredate`) VALUES (?,?,?,?,?,?,?,?,?);";
+
 	public static String ENQUIRE_SQL = "INSERT INTO `project`.`enquire_sql`"
 			+ "(`firstName`,`secondName`,`address1`,`address2`,`email`,`mobileContact`,`otherContact`,`slot1`,`slot2`,`fatherFirstName`,"
 			+ "`fatherSecondName`,`fatherMobileContact`,`fatherOtherContact`,`university`,`qualification`,`reference`,`EnquireDate`)"
