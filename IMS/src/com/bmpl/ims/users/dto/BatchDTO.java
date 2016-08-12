@@ -7,10 +7,25 @@ public class BatchDTO {
 	
 	private String batchname;
 	private String coursename;
+	private int course_id;
 	private int totalsets;
 	private String trainername;
 	private String description;
 	private Date batchstartdate;
+	private String starttime;
+	public String getStarttime() {
+		return starttime;
+	}
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+	public String getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+	private String endtime;
 	private ArrayList<CourseDTO> courseList;
 	public String getBatchname() {
 		return batchname;
@@ -21,8 +36,14 @@ public class BatchDTO {
 	public String getCoursename() {
 		return coursename;
 	}
-	public void setCoursename(String coursename) {
-		this.coursename = coursename;
+	public void setCoursename(String string) {
+		this.coursename = string;
+	}
+	public int getCourse_id() {
+		return course_id;
+	}
+	public void setCourse_id(int course_id) {
+		this.course_id = course_id;
 	}
 	public int getTotalsets() {
 		return totalsets;

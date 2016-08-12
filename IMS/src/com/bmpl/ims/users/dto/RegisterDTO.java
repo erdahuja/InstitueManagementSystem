@@ -1,4 +1,4 @@
-package com.bmpl.ims.users.DTO;
+package com.bmpl.ims.users.dto;
 
 public class RegisterDTO {
 
