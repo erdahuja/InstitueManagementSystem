@@ -15,12 +15,13 @@ import com.bmpl.ims.users.dto.CourseDTO;
 
 public class BatchDAO {
 
-	public boolean addbatch(BatchDTO batchdto) throws SQLException, ClassNotFoundException
+	public boolean addbatch(ArrayList<BatchDTO> arraybatch) throws SQLException, ClassNotFoundException
 	{
 		boolean isaddbatch=false;
 		String sql  = CommonSQLConstants.ADDBATCH_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		Integer row=null;
 		//String url2 = "jdbc:mysql://localhost:3306/admin?user=root&password=sunil2345";
 		//ResourceBundle rb=ResourceBundle.getBundle("connetionfile");
 		//Class.forName(rb.getString("drivername"));
@@ -28,14 +29,19 @@ public class BatchDAO {
 		//Class.forName("com.mysql.jdbc.Driver");
 		//Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/admin;",rb.getString("userid"),rb.getString("password"));
 		con=CommonDAO.getConnection();
+		for(BatchDTO batahlist: arraybatch)
+		{
 		pstmt=con.prepareStatement(sql);
-		pstmt.setString(1, batchdto.getBatchname());
-		pstmt.setString(2, batchdto.getCoursename());
-		pstmt.setString(3, batchdto.getTrainername());
-		pstmt.setLong(4, batchdto.getTotalsets());
-		pstmt.setString(5, batchdto.getDescription());
-		pstmt.setDate(6, (java.sql.Date)batchdto.getBatchstartdate());
-		int row = pstmt.executeUpdate();
+		pstmt.setString(1, batahlist.getBatchname());
+		pstmt.setString(2, batahlist.getCoursename());
+		pstmt.setString(3, batahlist.getTrainername());
+		pstmt.setLong(4, batahlist.getTotalsets());
+		pstmt.setString(5, batahlist.getDescription());
+		pstmt.setDate(6, (java.sql.Date)batahlist.getBatchstartdate());
+		pstmt.setString(7, batahlist.getStarttime());
+		pstmt.setString(8, batahlist.getEndtime());
+		row = pstmt.executeUpdate();
+		}
 		if(row>0)
 		{
 			isaddbatch=true;
@@ -48,13 +54,13 @@ public class BatchDAO {
 		return isaddbatch;
 	}
 	
-	public ArrayList<String> getCourse() throws SQLException, ClassNotFoundException
+	public static ArrayList<String> getCourse() throws SQLException, ClassNotFoundException
 	{
 		String getcourse = CommonSQLConstants.GETCOURSE_SQL;
 		Statement stmt=null;
 		ResultSet rs=null;
 		Connection con= null;
-		BatchDTO batchdto=new BatchDTO();
+		BatchDTO batchdto=null;
 		ArrayList<String> courseList = new ArrayList<>();
 		
 		con=CommonDAO.getConnection();
@@ -62,9 +68,10 @@ public class BatchDAO {
 		rs=stmt.executeQuery(getcourse);
 		while(rs.next())
 		{
-			CourseDTO Coursedto= new CourseDTO();
-			Coursedto.setCoursename(rs.getString("coursename"));
-			courseList.add(Coursedto.getCoursename());
+			batchdto= new BatchDTO();
+			batchdto.setCoursename(rs.getString("coursename"));
+			batchdto.setCourse_id(rs.getInt("course_id"));
+			courseList.add(batchdto.getCoursename());
 		}
 		return courseList;
 	}

@@ -1,21 +1,20 @@
-package com.bmpl.ims.users.DAO;
+package com.bmpl.ims.users.dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-//import com.bmpl.ims.common.dao.CommonDAO;
-import com.bmpl.ims.Common.*;
-import com.bmpl.ims.users.DTO.TeacherDTO;
+import com.bmpl.ims.common.dao.CommonDAO;
+import com.bmpl.ims.common.dao.CommonSQLConstants;
+
 
 public class TeacherDAO {
 	
-	public boolean addTutor(TeacherDTO teacherDTO) throws SQLException{
+	public boolean addTutor(com.bmpl.ims.users.dto.TeacherDTO teacherDTO) throws SQLException{
 		boolean tutorAdded = false;
-		String sql = CommonSQLConstants.ADDSTUDENT_SQL;
+		String sql = CommonSQLConstants.ADDTUTOR_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int rs;
@@ -40,7 +39,7 @@ public class TeacherDAO {
 	}
 	public ArrayList<String> getCourse() throws SQLException {
 		boolean coursesShown = false;
-		String sql = CommonSQLConstants.VIEWSTUDENT_SQL;
+		String sql = CommonSQLConstants.VIEWCOURSE_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs;
@@ -70,7 +69,7 @@ public class TeacherDAO {
 	
 public boolean deleteCourse(String item) throws SQLException{
 	boolean isDeleted = false;
-	String sql = CommonSQLConstants.DELETESTUDENT_SQL;
+	String sql = CommonSQLConstants.DELETECOURSE_SQL;
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -95,7 +94,7 @@ public boolean deleteCourse(String item) throws SQLException{
 
 public static boolean updateCourse(String item) throws SQLException{
 	boolean isUpdated = false;
-	String sql = CommonSQLConstants.UPDATESTUDENT_SQL;
+	String sql = CommonSQLConstants.UPDATECOURSE_SQL;
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -117,91 +116,9 @@ public static boolean updateCourse(String item) throws SQLException{
 }
 
 
-	return isUpdated = true;
+return isUpdated = true;
 }
-
-/*public static ArrayList<String> showCourse(String item) throws SQLException {
-	boolean coursesShown = false;
-	String sql = CommonSQLConstants.CHOOSECOURSE_SQL;
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs;
-	ArrayList<String> list = new ArrayList<String>();
-	try {
-		con = CommonDAO.getConnection();
-		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, item);
-		pstmt.setString(2, item);
-		pstmt.setString(3, item);
-		pstmt.setString(4, item);
-		pstmt.setString(5, item);
-		pstmt.setString(6, item);
-		pstmt.setString(7, item);
-		
-		
-		rs = pstmt.executeQuery();
-
-		while (rs.next()) {
-
-			list.add(rs.getString(1));
-
-			list.add(rs.getString(2));
-
-			list.add(rs.getString(3));
-
-			list.add(rs.getString(4));
-
-			list.add(rs.getString(5));
-			list.add(rs.getString(6));
-			list.add(rs.getString(7));
-
-			coursesShown = true;
-		
-
-	}
-	}catch (Exception e) {
-		e.printStackTrace();
-		coursesShown = false;
-
-	} finally {
-		con.close();
-	}
-	return list;
-
-
 	
 	
-
-}*/
-
-/*public ArrayList<String> showCourse() throws SQLException {
-	boolean coursesShown = false;
-	String sql = CommonSQLConstants.CHOOSECOURSE_SQL;
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs;
-	ArrayList<String> list = new ArrayList<String>();
-	try {
-		con = CommonDAO.getConnection();
-		pstmt = con.prepareStatement(sql);
-		
-		rs = pstmt.executeQuery();
-
-		while (rs.next()) {
-
-			list.add(rs.getString("name"));
-
-			coursesShown = true;
-		}
-
-	} catch (Exception e) {
-		e.printStackTrace();
-		coursesShown = false;
-
-	} finally {
-		con.close();
-	}
-	return list;
-}*/
 
 }

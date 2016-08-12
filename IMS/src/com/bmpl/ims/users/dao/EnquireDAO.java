@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 import com.bmpl.ims.common.dao.CommonDAO;
 import com.bmpl.ims.common.dao.CommonSQLConstants;
 import com.bmpl.ims.users.dto.EnquireDTO;
-import com.bmpl.ims.users.views.EnquireView;
 
 public class EnquireDAO {
 	public boolean addEnquire(EnquireDTO enquireDTO) throws ClassNotFoundException, SQLException{
@@ -38,8 +37,7 @@ public class EnquireDAO {
 		pstm.setString(14, enquireDTO.getUniversity());
 		pstm.setString(15, enquireDTO.getQualification());
 		pstm.setString(16, enquireDTO.getReference());
-		EnquireView enquireView = new EnquireView();
-		pstm.setTimestamp(17,enquireView.getCurrentTimeStamp());
+		java.sql.Date date;
 		
 		
 		rs = pstm.executeUpdate();
@@ -48,7 +46,7 @@ public class EnquireDAO {
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println("can't execute");
+			System.out.println("can't execiute");
 		}
 		finally{
 			con.close();
@@ -59,7 +57,7 @@ public class EnquireDAO {
 	
 	public ArrayList<String> getCourse() throws SQLException{
 		boolean courseShown = false;
-		String sql = CommonSQLConstants.COURSE_SQL;
+		String sql = CommonSQLConstants.VIEWCOURSE_SQL;
 		Connection con = null;
 		PreparedStatement pstm = null;
 			ResultSet rs;

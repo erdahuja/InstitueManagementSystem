@@ -1,21 +1,19 @@
-package com.bmpl.ims.users.DAO;
+package com.bmpl.ims.users.dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-//import com.bmpl.ims.common.dao.CommonDAO;
-import com.bmpl.ims.Common.*;
-import com.bmpl.ims.users.DTO.StudentDTO;
+import com.bmpl.ims.common.dao.CommonDAO;
+import com.bmpl.ims.common.dao.CommonSQLConstants;
 
 public class StudentDAO {
 	
-	public boolean addTutor(StudentDTO studentDTO) throws SQLException{
+	public boolean addTutor(com.bmpl.ims.users.dto.StudentDTO studentDTO) throws SQLException{
 		boolean tutorAdded = false;
-		String sql = CommonSQLConstants.ADDSTUDENT_SQL;
+		String sql = CommonSQLConstants.ADDTUTOR_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int rs;
@@ -40,7 +38,7 @@ public class StudentDAO {
 	}
 	public ArrayList<String> getCourse() throws SQLException {
 		boolean coursesShown = false;
-		String sql = CommonSQLConstants.VIEWSTUDENT_SQL;
+		String sql = CommonSQLConstants.VIEWCOURSE_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs;
@@ -70,7 +68,7 @@ public class StudentDAO {
 	
 public boolean deleteCourse(String item) throws SQLException{
 	boolean isDeleted = false;
-	String sql = CommonSQLConstants.DELETESTUDENT_SQL;
+	String sql = CommonSQLConstants.DELETECOURSE_SQL;
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -95,7 +93,7 @@ public boolean deleteCourse(String item) throws SQLException{
 
 public boolean updateCourse(String item) throws SQLException{
 	boolean isUpdated = false;
-	String sql = CommonSQLConstants.UPDATESTUDENT_SQL;
+	String sql = CommonSQLConstants.UPDATECOURSE_SQL;
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;

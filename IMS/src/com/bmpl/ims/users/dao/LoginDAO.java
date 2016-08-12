@@ -13,7 +13,7 @@ import com.bmpl.ims.users.dto.UserDTO;
 public class LoginDAO {
 	public boolean authenticateAdmin(UserDTO userDTO) throws ClassNotFoundException, SQLException{
 		boolean isFound = false;
-		String sql  = CommonSQLConstants.LOGIN_SQLADMIN;
+		String sql  = CommonSQLConstants.LOGIN_SQLAdmin;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		Statement stmt=null;
@@ -43,7 +43,7 @@ public class LoginDAO {
 	}
 	public boolean authenticateCounselor(UserDTO userDTO) throws ClassNotFoundException, SQLException{
 		boolean isFound = false;
-		String sql  = CommonSQLConstants.LOGIN_SQLCOUNSELOR;
+		String sql  = CommonSQLConstants.LOGIN_SQLCounsellor;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		Statement stmt=null;

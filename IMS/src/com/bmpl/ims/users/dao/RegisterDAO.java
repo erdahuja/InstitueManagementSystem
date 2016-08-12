@@ -2,18 +2,19 @@ package com.bmpl.ims.users.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.bmpl.ims.common.dao.CommonDAO;
 import com.bmpl.ims.common.dao.CommonSQLConstants;
-import com.bmpl.ims.users.dto.RegisterDTO;
+
 
 public class RegisterDAO {
 
-	public boolean register(RegisterDTO registerDTO) throws SQLException, ClassNotFoundException {
+	public boolean register(com.bmpl.ims.users.dto.RegisterDTO registerDTO) throws SQLException, ClassNotFoundException {
 
 		boolean registration = false;
-		String sql = com.bmpl.ims.common.dao.CommonSQLConstants.REGISTRATION_SQL;
+		String sql = CommonSQLConstants.REGISTRATION_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int rs;
