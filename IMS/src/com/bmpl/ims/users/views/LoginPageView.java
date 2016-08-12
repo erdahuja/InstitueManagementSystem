@@ -1,6 +1,6 @@
 package com.bmpl.ims.users.views;
 /*
-* @author  Sunil vishkarma
+* @author  Sunil vishkarma;
 * @version 0.1
 * This is a Login Page Design 
 */
@@ -9,6 +9,7 @@ package com.bmpl.ims.users.views;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -27,12 +28,13 @@ public class LoginPageView extends JFrame {
 	private JPasswordField txtpassword;
 	private static String selecteditem;
 	private JComboBox comboBox;
-
+	static LoginPageView frame;
 
 	public static void main(String[] args) {
 		
-					LoginPageView frame = new LoginPageView();
+					frame=  new LoginPageView();
 					frame.setVisible(true);
+
 				
 	}
 	public LoginPageView() {
@@ -99,6 +101,7 @@ public class LoginPageView extends JFrame {
 		lblPleaseSelect.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblPleaseSelect.setBounds(71, 83, 120, 33);
 		getContentPane().add(lblPleaseSelect);
+
 	}
 	 public void Login()
 	 {
@@ -115,7 +118,16 @@ public class LoginPageView extends JFrame {
 						boolean isFound = loginDAO.authenticateAdmin(userDTO);
 						if(isFound)
 						{
-							JOptionPane.showMessageDialog(this, "Admin");
+						
+							frame.setVisible(false);
+							frame.dispose();
+							try {
+								new DashBoardView(selecteditem,userDTO.getUserid());
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
 						}
 				else
 				{
@@ -140,6 +152,12 @@ public class LoginPageView extends JFrame {
 		 if(isFound)
 			{
 			 JOptionPane.showMessageDialog(this, "Counselor");
+			 try {
+					new DashBoardView(selecteditem,userDTO.getUserid());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		 else
 			{

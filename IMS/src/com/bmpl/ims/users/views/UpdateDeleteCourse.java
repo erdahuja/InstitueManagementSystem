@@ -12,6 +12,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.bmpl.ims.common.utils.CommonMethods;
 import com.bmpl.ims.users.dao.CoursesDAO;
 
 public class UpdateDeleteCourse extends JFrame {
@@ -62,7 +63,7 @@ public class UpdateDeleteCourse extends JFrame {
 
 		CoursesDAO coursesDAO = new CoursesDAO();
 		try {
-			ArrayList<String> list = coursesDAO.getCourse();
+			ArrayList<String> list = CommonMethods.getCourse();
 			if (!list.isEmpty()) {
 				for (String name : list) {
 					listModel.addElement(name);

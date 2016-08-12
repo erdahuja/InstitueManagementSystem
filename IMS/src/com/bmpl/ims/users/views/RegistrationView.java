@@ -1,25 +1,25 @@
 package com.bmpl.ims.users.views;
-
-import java.awt.Component;
-
-
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import com.bmpl.ims.users.DAO.RegisterDAO;
-import com.bmpl.ims.users.DTO.RegisterDTO;
+import com.bmpl.ims.common.utils.CommonMethods;
+import com.bmpl.ims.users.dao.RegisterDAO;
+import com.bmpl.ims.users.dto.RegisterDTO;
+
+
 
 /*
 * @author  Ojaswi Wadhwa
@@ -37,54 +37,62 @@ public class RegistrationView extends JFrame {
 	private JTextField txtEmail;
 	private JTextField txtFather;
 	private JTextField txtState;
+	private JList<String> list1;
+	private DefaultListModel<String> listModel = new DefaultListModel<String>();
+	private ArrayList<String> list;
+	
+	private JList<String> list2;
+	private DefaultListModel<String> listModel1 = new DefaultListModel<String>();
+	
+
+	private ArrayList<String> batchList;
+	private JFrame frame=new JFrame();
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 
-		RegistrationView frame = new RegistrationView();
-		frame.setVisible(true);
+		  new RegistrationView();
+		
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	JComboBox comboBatch;
-	JComboBox comboCountry;
+	
 
 	public RegistrationView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 622, 499);
+		
+		list=new ArrayList<>();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 622, 499);
 		contentPane = new JPanel();
 
 		contentPane.setLayout(null);
-		setContentPane(contentPane);
+		frame.setContentPane(contentPane);
 
 		JLabel lblName = new JLabel("Name : ");
-		lblName.setBounds(10, 38, 46, 14);
+		lblName.setBounds(10, 38, 63, 14);
 		contentPane.add(lblName);
 
 		txtName = new JTextField();
-		txtName.setBounds(107, 35, 173, 20);
+		txtName.setBounds(91, 36, 173, 20);
 		contentPane.add(txtName);
 		txtName.setColumns(10);
 
 		JLabel lblAddress = new JLabel("Address : ");
-		lblAddress.setBounds(10, 96, 63, 14);
+		lblAddress.setBounds(10, 96, 79, 14);
 		contentPane.add(lblAddress);
 
 		txtAddress = new JTextField();
-		txtAddress.setBounds(107, 93, 173, 20);
+		txtAddress.setBounds(91, 94, 173, 20);
 		contentPane.add(txtAddress);
 		txtAddress.setColumns(10);
 
-		JLabel lblPhoneNumber = new JLabel("Phone number :");
+		JLabel lblPhoneNumber = new JLabel("Phone :");
 		lblPhoneNumber.setBounds(10, 166, 112, 14);
 		contentPane.add(lblPhoneNumber);
 
 		txtPhone = new JTextField();
-		txtPhone.setBounds(107, 163, 173, 20);
+		txtPhone.setBounds(91, 164, 173, 20);
 		contentPane.add(txtPhone);
 		txtPhone.setColumns(10);
 
@@ -93,36 +101,21 @@ public class RegistrationView extends JFrame {
 		contentPane.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(107, 235, 173, 20);
+		txtEmail.setBounds(91, 236, 173, 20);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		JLabel lblCourse = new JLabel("Course :");
-		lblCourse.setBounds(10, 316, 46, 14);
+		lblCourse.setBounds(10, 316, 78, 14);
 		contentPane.add(lblCourse);
 
-		JCheckBox chckbxJava = new JCheckBox("Java");
-		chckbxJava.setBounds(105, 312, 97, 23);
-		contentPane.add(chckbxJava);
-
-		JCheckBox chckbxUserInterface = new JCheckBox("User Interface");
-		chckbxUserInterface.setBounds(204, 312, 126, 23);
-		contentPane.add(chckbxUserInterface);
-
-		JCheckBox chckbxMean = new JCheckBox("MEAN");
-		chckbxMean.setBounds(344, 312, 97, 23);
-		contentPane.add(chckbxMean);
-
-		JCheckBox chckbxAndroid = new JCheckBox("Android");
-		chckbxAndroid.setBounds(443, 312, 97, 23);
-		contentPane.add(chckbxAndroid);
 
 		JLabel lblFathersName = new JLabel("Father's name :");
-		lblFathersName.setBounds(344, 38, 97, 14);
+		lblFathersName.setBounds(296, 38, 111, 14);
 		contentPane.add(lblFathersName);
 
 		txtFather = new JTextField();
-		txtFather.setBounds(443, 35, 153, 20);
+		txtFather.setBounds(425, 36, 153, 20);
 		contentPane.add(txtFather);
 		txtFather.setColumns(10);
 
@@ -135,16 +128,6 @@ public class RegistrationView extends JFrame {
 		btnSubmit.setBounds(137, 380, 89, 23);
 		contentPane.add(btnSubmit);
 
-		JButton btnReset = new JButton("Reset");
-		btnReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				doReset();
-			}
-		});
-		btnReset.setBounds(275, 380, 89, 23);
-		contentPane.add(btnReset);
-
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -154,57 +137,86 @@ public class RegistrationView extends JFrame {
 		btnExit.setBounds(418, 380, 89, 23);
 		contentPane.add(btnExit);
 
-		JLabel lblCountry = new JLabel("Country :");
-		lblCountry.setBounds(344, 96, 46, 14);
-		contentPane.add(lblCountry);
-
-		comboCountry = new JComboBox();
-		comboCountry.setBounds(443, 93, 112, 20);
-		contentPane.add(comboCountry);
-		comboCountry.addItem("Select your country");
-		comboCountry.addItem("India");
-		comboCountry.addItem("Australia");
-		comboCountry.addItem("France");
-		comboCountry.addItem("USA");
-
+	
 		JLabel lblState = new JLabel("State :");
-		lblState.setBounds(344, 166, 46, 14);
+		lblState.setBounds(301, 96, 63, 14);
 		contentPane.add(lblState);
 
 		txtState = new JTextField();
-		txtState.setBounds(443, 163, 153, 20);
+		txtState.setBounds(425, 94, 153, 20);
 		contentPane.add(txtState);
 		txtState.setColumns(10);
 
 		JLabel lblBatch = new JLabel("Batch :");
-		lblBatch.setBounds(344, 241, 46, 14);
+		lblBatch.setBounds(301, 241, 89, 14);
 		contentPane.add(lblBatch);
 
-		comboBatch = new JComboBox();
-		comboBatch.setBounds(443, 235, 112, 20);
-		contentPane.add(comboBatch);
-		comboBatch.addItem("Select your batch");
-		comboBatch.addItem("6-7 MWF");
-		comboBatch.addItem("5-6 TTS");
-		comboBatch.addItem("6-8 Sat-Sun");
+		
+	
 
 		JLabel lblRegistration = new JLabel("Registration");
 		lblRegistration.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		lblRegistration.setBounds(238, -1, 126, 25);
 		contentPane.add(lblRegistration);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(433, 253, 145, 54);
+		contentPane.add(scrollPane);
+		frame.setVisible(true);
+		
+
+		listModel = new DefaultListModel<String>();
+		 list1 = new JList<String>(listModel);
+		list1.setValueIsAdjusting(true);
+		list1.setBounds(91, 282, 173, 86);
+		contentPane.add(list1);
+		
+		try {
+			list = CommonMethods.getCourse();
+			for (String courses : list){
+				listModel.addElement(courses);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		JScrollPane scrollPane1 = new JScrollPane();
+		scrollPane.setBounds(425, 204, 145, 103);
+		contentPane.add(scrollPane);
+		frame.setVisible(true);
+		
+		listModel1 = new DefaultListModel<String>();
+		 list2 = new JList<String>(listModel1);
+		list2.setValueIsAdjusting(true);
+		list2.setBounds(425, 204, 145, 103);
+		contentPane.add(list2);
+		
+		try {
+			batchList = CommonMethods.getCourse(); //change to getBatch();
+			for (String batches : batchList){
+				listModel1.addElement(batches);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+
 	}
 
-	public  void doSubmit() {
+	private void doSubmit() {
 
 		RegisterDAO registerDAO = new RegisterDAO();
 		RegisterDTO registerDTO = new RegisterDTO();
-		//String info = null;
+
 		registerDTO.setName(txtName.getText());
 		registerDTO.setAddress(txtAddress.getText());
 		registerDTO.setState(txtState.getText());
 		registerDTO.setPhone(txtPhone.getText());
 		registerDTO.setMail(txtEmail.getText());
-		registerDTO.setCountry(comboCountry.getSelectedItem().toString());
+		
 		registerDTO.setFname(txtFather.getText());
 
 		try {
@@ -214,17 +226,12 @@ public class RegistrationView extends JFrame {
 
 			e.printStackTrace();
 		}
-		
 	}
 
-	private void doReset() {
-
-	}
-
+	
 	private void doExit() {
 
 		System.exit(0);
 
 	}
-
 }

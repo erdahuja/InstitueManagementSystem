@@ -1,5 +1,5 @@
-package com.bmpl.ims.users.views;
 
+ package com.bmpl.ims.users.views;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,46 +14,44 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-import com.bmpl.ims.users.DAO.TeacherDAO;
+import com.bmpl.ims.users.dao.TeacherDAO;
+
 
 public class TeacherView extends JFrame {
 
 	private JPanel contentPane;
 	private DefaultListModel<String> listModel;
 	private JList<String> list ;
-	//static JTextArea textUpdateArea;
+	static JTextArea textUpdateArea;
 	private JLabel lblTeacher;
-	RegistrationView registerView = new RegistrationView();
+	private JFrame frame=new JFrame();
 	
 	
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TeacherView frame = new TeacherView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		
+				new TeacherView();
+					
+			
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public TeacherView() {
-		setTitle("TEACHER");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 848, 493);
+		frame.setTitle("TEACHER");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 848, 493);
 		contentPane = new JPanel();
 		
 		contentPane.setLayout(null);
-		setContentPane(contentPane);
+		frame.setContentPane(contentPane);
 		
 		listModel = new DefaultListModel<String>();
 		 list = new JList<String>(listModel);
@@ -61,7 +59,7 @@ public class TeacherView extends JFrame {
 		list.setBounds(36, 41, 257, 339);
 		contentPane.add(list);
 
-		/*list.addListSelectionListener(new ListSelectionListener() {
+		list.addListSelectionListener(new ListSelectionListener() {
 			
 
 			@Override
@@ -70,27 +68,20 @@ public class TeacherView extends JFrame {
 				textUpdateArea.setVisible(true);
 				lblTeacher.setVisible(true);
 				textUpdateArea.setText("");
-				try {
-					if (list.getSelectedValue() == null) {
-						textUpdateArea.setVisible(false);
-						lblTeacher.setVisible(false);
-					}
-					textUpdateArea.setText(TeacherDAO.updateCourse(list.getSelectedValue()));
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (list.getSelectedValue() == null) {
+					textUpdateArea.setVisible(false);
+					lblTeacher.setVisible(false);
 				}
+				//textUpdateArea.setText(com.bmpl.ims.users.dao.TeacherDAO.updateCourse(list.getSelectedValue()));
 
 			}
 
-		});*/
+		});
 		
 		JButton btnView = new JButton("View");
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				bringCourses();
-				
 			}
 		});
 		btnView.setBounds(145, 15, 89, 23);
@@ -100,12 +91,6 @@ public class TeacherView extends JFrame {
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				updateCourse();
-				
-				
-				
-				
-				
-				
 			}
 		});
 		btnUpdate.setBounds(46, 391, 89, 23);
@@ -126,6 +111,7 @@ public class TeacherView extends JFrame {
 		});
 		btnDelete.setBounds(204, 391, 89, 23);
 		contentPane.add(btnDelete);
+		frame.setVisible(true);
 	}
 	
 
@@ -156,8 +142,6 @@ public class TeacherView extends JFrame {
 		if(item!=null){
 			System.out.println("Selected item "+item);
 			update(item);
-			registerView.setVisible(true);
-			registerView.doSubmit();
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "no teacher selected");
@@ -186,7 +170,6 @@ public class TeacherView extends JFrame {
 	protected void deleteItem(String item) {
 		TeacherDAO teacherDAO = new TeacherDAO();
 		System.out.println(item);
-		
 		try {
 			if (item != null) {
 
@@ -213,8 +196,6 @@ public class TeacherView extends JFrame {
 		try {
 
 			teacherDAO.updateCourse(item);
-			//teacherDAO.showCourse();
-			
 			
 
 		} catch (SQLException e) {
@@ -226,3 +207,4 @@ public class TeacherView extends JFrame {
 	}
 		
 	}
+

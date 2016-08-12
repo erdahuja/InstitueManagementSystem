@@ -25,12 +25,15 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.bmpl.ims.common.utils.DateLabelFormatter;
 import com.bmpl.ims.users.dao.TrainerDao;
 import com.bmpl.ims.users.dto.TrainerDTO;
 
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
+
 
 
 public class TrainerRegistration extends JFrame {
@@ -55,16 +58,16 @@ public class TrainerRegistration extends JFrame {
 	private static JLabel l6;
 	private static JLabel l7;
 	private static JLabel l8;
-	private static TrainerRegistration frame;
+	private static JFrame frame=new JFrame();
 	private static JLabel lblImage;
-	private 	JDatePickerImpl datePicker;
+	private JDatePickerImpl datePicker;
 
 	
 	
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		
-					frame = new TrainerRegistration();
-					frame.setVisible(true);
+					new TrainerRegistration();
+				
 					
 	}
 
@@ -78,12 +81,13 @@ public class TrainerRegistration extends JFrame {
 	public TrainerRegistration() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 	
 	
-		setFont(new Font("Apple Garamond", Font.BOLD | Font.ITALIC, 20));
-		setTitle("Trainer Registration");
-		getContentPane().setBackground(new Color(135, 206, 250));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(380, 100, 586, 500);
-		this.getContentPane().setLayout(null);
+		frame.setFont(new Font("Apple Garamond", Font.BOLD | Font.ITALIC, 20));
+		frame.setTitle("Trainer Registration");
+		frame.getContentPane().setBackground(new Color(135, 206, 250));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(380, 100, 586, 500);
+		frame.getContentPane().setLayout(null);
+		frame.setContentPane(getContentPane());
 		
 		JLabel lblTrainerName = new JLabel("Trainer Name");
 		lblTrainerName.setBounds(35, 68, 95, 15);
@@ -242,7 +246,7 @@ public class TrainerRegistration extends JFrame {
 		UtilDateModel model = new UtilDateModel();
 		
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-	datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+	datePicker = new JDatePickerImpl(datePanel,new DateLabelFormatter());
 
 		 datePicker.setBounds(176, 423, 196, 25);
 		getContentPane().add(datePicker);
@@ -260,15 +264,9 @@ public class TrainerRegistration extends JFrame {
 		lblImage.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 0), new Color(0, 0, 0), new Color(0, 0, 0), new Color(0, 0, 0)));
 		lblImage.setBounds(409, 57, 139, 145);
 		getContentPane().add(lblImage);
-		
-		
-		
-		
-		
-	
-		
 	
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		frame.setVisible(true);
 	}
 	public ImageIcon ResizeImage(String path)
     {
@@ -415,5 +413,4 @@ public class TrainerRegistration extends JFrame {
 		  
 	}
 }
-
 

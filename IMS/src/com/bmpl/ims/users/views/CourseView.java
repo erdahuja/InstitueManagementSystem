@@ -23,7 +23,7 @@ public class CourseView extends JFrame {
 	static JTextField txtTrainer;
 	static JTextArea txtDays;
 	static JTextArea txtDescription;
-	static JFrame frame = new JFrame();;
+	static JFrame frame = new JFrame();
 
 	public static void main(String[] args) {
 

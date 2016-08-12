@@ -24,25 +24,23 @@ public class TakeAttendanceView extends JFrame {
 	ArrayList<String> comboItems = new ArrayList<String>();
 	DefaultListModel listModel1 = new DefaultListModel();
 	DefaultListModel listModel2 = new DefaultListModel();
-
+JFrame frame=new JFrame();
 	ArrayList<String> list;
 
 	public static void main(String[] args) {
 
-		TakeAttendanceView frame = new TakeAttendanceView();
-		frame.setVisible(true);
-		Date date = new Date();
-		frame.setTitle("Mark Attendance " + date.toString());
+		new TakeAttendanceView();
+		
 
 	}
 
 	public TakeAttendanceView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 717, 395);
+		frame.setBounds(100, 100, 717, 395);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		setContentPane(contentPane);
+		frame.setContentPane(contentPane);
 
 		JLabel lblStudents = new JLabel("Total Students");
 		lblStudents.setBounds(29, 35, 139, 15);
@@ -72,27 +70,12 @@ public class TakeAttendanceView extends JFrame {
 				list.add("n2");
 				list.add("n3");
 				list.add("n4");
-				list.add("n6");
-				list.add("n7");
-				list.add("n8");
-				list.add("n9");
-				list.add("n10");
-				list.add("n20");
-				list.add("n30");
-				list.add("n11");
-				list.add("n22");
-				list.add("n33");
-				list.add("n14");
-				list.add("n25");
-				list.add("n36");
-				list.add("n17");
-				list.add("n28");
-				list.add("n39");
+		
 				System.out.println(list.size());
 				int i = 1;
 				if (!list.isEmpty()) {
 					for (String name : list) {
-						System.out.println(name + "\n");
+						//System.out.println(name + "\n");
 						if (i < 10)
 							listModel1.addElement(i++ + " :     " + name);
 						else
@@ -205,6 +188,10 @@ public class TakeAttendanceView extends JFrame {
 		
 		JLabel lblSNoNam = new JLabel("S No.  Name");
 		scrollPane_1.setColumnHeaderView(lblSNoNam);
+		
+		frame.setVisible(true);
+		Date date = new Date();
+		frame.setTitle("Mark Attendance " + date.toString());
 
 	}
 }

@@ -45,10 +45,12 @@ public class AddBatchView extends JFrame {
 	private JTextField starttime;
 	private JTextField endtime;
 	private JComboBox comboBox1;
+	 JFrame frame = new JFrame();
+	
 	public static void main(String[] args) {
 	
-					AddBatchView frame = new AddBatchView();
-					frame.setVisible(true);
+					  new AddBatchView();
+					
 		
 	}
 
@@ -191,6 +193,8 @@ public class AddBatchView extends JFrame {
 		endtime.setColumns(10);
 		endtime.setBounds(226, 315, 117, 20);
 		getContentPane().add(endtime);
+		
+		frame.setVisible(true);
 	}
 	
 	public void addbatch()

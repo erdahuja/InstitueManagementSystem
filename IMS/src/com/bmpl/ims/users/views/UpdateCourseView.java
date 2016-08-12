@@ -27,21 +27,22 @@ public class UpdateCourseView extends JFrame {
 	static JTextArea textUpdateArea;
 	static JLabel lblCou;
 	static DefaultListModel<String> listModel;
-
+static JFrame frame= new JFrame();
 	public static void main(String[] args) {
 
-		UpdateCourseView frame = new UpdateCourseView();
-		frame.setVisible(true);
+		 new UpdateCourseView();
+	
 
 	}
 
 	public UpdateCourseView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 350);
+		frame.setTitle("Update Courses");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 700, 350);
 		contentPane = new JPanel();
 
 		contentPane.setLayout(null);
-		setContentPane(contentPane);
+		frame.setContentPane(contentPane);
 
 		listModel = new DefaultListModel<String>();
 		JList<String> courseList = new JList<String>(listModel);
@@ -156,6 +157,7 @@ public class UpdateCourseView extends JFrame {
 
 		textUpdateArea.setVisible(false);
 
+		frame.setVisible(true);
 	}
 
 	protected void update(String item) {

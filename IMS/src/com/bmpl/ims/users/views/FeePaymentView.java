@@ -13,14 +13,6 @@ import com.bmpl.ims.users.dao.FeePayamentDAO;
 
 import com.bmpl.ims.users.dao.FeePayamentDAO.function;
 import com.bmpl.ims.users.dto.FeePaymentDTO;
-import com.lowagie.text.Document;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfWriter;
-import com.lowagie.text.pdf.codec.Base64.OutputStream;
-
-import java.io.File;
-import java.io.FileOutputStream;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,7 +29,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -69,7 +60,6 @@ public class FeePaymentView extends JFrame {
 					FeePaymentView frame = new FeePaymentView();
 					frame.setVisible(true);
 					frame.setTitle("Fee Payment");
-					
 			
 		
 	}
@@ -241,7 +231,6 @@ public class FeePaymentView extends JFrame {
 		btnMakePayment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				feePayment();
-				generate();
 			}
 		});
 		btnMakePayment.setFont(new Font("Times New Roman", Font.BOLD, 13));
@@ -325,15 +314,12 @@ public class FeePaymentView extends JFrame {
 					
 						textChequeNum.setVisible(false);
 					
-						lblBankName.setVisible(false);
-						textBankName.setVisible(false);
 						
 					}
 		    	  else{
 		    		  lblChequeNum.setVisible(true);
-		    		  lblBankName.setVisible(true);
+		    		  
 		    			textChequeNum.setVisible(true);
-		    			textBankName.setVisible(true);	
 		    	  }
 		      }
 		    });
@@ -416,25 +402,6 @@ public class FeePaymentView extends JFrame {
 			e.printStackTrace();
 		}
 		}
-	private void generate()
-	{
-		try {
-			FileOutputStream file = new FileOutputStream(new File("D:\\Test.pdf"));
-
-			Document document = new Document(PageSize.A4);
-			PdfWriter.getInstance(document, file);
-
-			document.open();
-			document.add(new Paragraph("Hello World, iText"));
-			document.add(new Paragraph(new Date().toString()));
-
-			document.close();
-			file.close();
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-	}
+		
 	
 }
