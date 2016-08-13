@@ -13,6 +13,18 @@ import com.bmpl.ims.users.dao.FeePayamentDAO;
 
 import com.bmpl.ims.users.dao.FeePayamentDAO.function;
 import com.bmpl.ims.users.dto.FeePaymentDTO;
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.codec.Base64.OutputStream;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,6 +41,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -60,6 +73,7 @@ public class FeePaymentView extends JFrame {
 					FeePaymentView frame = new FeePaymentView();
 					frame.setVisible(true);
 					frame.setTitle("Fee Payment");
+					
 			
 		
 	}
@@ -231,6 +245,7 @@ public class FeePaymentView extends JFrame {
 		btnMakePayment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				feePayment();
+				generate();
 			}
 		});
 		btnMakePayment.setFont(new Font("Times New Roman", Font.BOLD, 13));
@@ -314,12 +329,15 @@ public class FeePaymentView extends JFrame {
 					
 						textChequeNum.setVisible(false);
 					
+						lblBankName.setVisible(false);
+						textBankName.setVisible(false);
 						
 					}
 		    	  else{
 		    		  lblChequeNum.setVisible(true);
-		    		  
+		    		  lblBankName.setVisible(true);
 		    			textChequeNum.setVisible(true);
+		    			textBankName.setVisible(true);	
 		    	  }
 		      }
 		    });
@@ -402,6 +420,190 @@ public class FeePaymentView extends JFrame {
 			e.printStackTrace();
 		}
 		}
-		
+	private void generate()
+	{
+		FeePaymentDTO feePaymentDTO=new FeePaymentDTO();
+		Document document = new Document(PageSize.A4);
+		 try
+	      {
+	         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HelloWorld.pdf"));
+	         document.open();
+	         Paragraph paragraph = new Paragraph();
+	         paragraph.setSpacingAfter(10);
+           //  paragraph.setSpacingBefore(0);
+             paragraph.setAlignment(Element.ALIGN_CENTER);
+            // paragraph1.setIndentationLeft(50);
+           //  paragraph1.setIndentationRight(50);
+	         
+	   
+	         Paragraph paragraph2 = new Paragraph();
+	         paragraph2.setSpacingAfter(2);
+             paragraph2.setSpacingBefore(12);
+             paragraph2.setAlignment(Element.ALIGN_LEFT);
+             paragraph2.setIndentationLeft(50);
+             paragraph2.setIndentationRight(50);
+             
+             Chunk chunk0=new Chunk(
+        	         "INSTITUTE MANAGEMENT SYSTEM");
+         
+             
+             Paragraph paragraph3 = new Paragraph();
+	         paragraph3.setSpacingAfter(2);
+             paragraph3.setSpacingBefore(2);
+             paragraph3.setAlignment(Element.ALIGN_LEFT);
+             paragraph3.setIndentationLeft(50);
+             paragraph3.setIndentationRight(50);
+             
+             
+             Paragraph paragraph4 = new Paragraph();
+	         paragraph4.setSpacingAfter(2);
+             paragraph4.setSpacingBefore(4);
+             paragraph4.setAlignment(Element.ALIGN_LEFT);
+             paragraph4.setIndentationLeft(50);
+             paragraph4.setIndentationRight(50);	
+             
+             Paragraph paragraph5 = new Paragraph();
+	         paragraph5.setSpacingAfter(2);
+             paragraph5.setSpacingBefore(2);
+             paragraph5.setAlignment(Element.ALIGN_LEFT);
+             paragraph5.setIndentationLeft(50);
+             paragraph5.setIndentationRight(50);
+             
+             Paragraph paragraph6 = new Paragraph();
+	         paragraph6.setSpacingAfter(0);
+             paragraph6.setSpacingBefore(0);
+             paragraph6.setAlignment(Element.ALIGN_LEFT);
+             paragraph6.setIndentationLeft(50);
+             paragraph6.setIndentationRight(50);
+             
+             Paragraph paragraph7 = new Paragraph();
+	         paragraph7.setSpacingAfter(0);
+             paragraph7.setSpacingBefore(0);
+             paragraph7.setAlignment(Element.ALIGN_LEFT);
+             paragraph7.setIndentationLeft(50);
+             paragraph7.setIndentationRight(50);
+             
+             Paragraph paragraph8 = new Paragraph();
+	         paragraph8.setSpacingAfter(0);
+             paragraph8.setSpacingBefore(0);
+             paragraph8.setAlignment(Element.ALIGN_LEFT);
+             paragraph8.setIndentationLeft(50);
+             paragraph8.setIndentationRight(50);
+             
+             Paragraph paragraph9 = new Paragraph();
+	         paragraph9.setSpacingAfter(0);
+             paragraph9.setSpacingBefore(0);
+             paragraph9.setAlignment(Element.ALIGN_LEFT);
+             paragraph9.setIndentationLeft(50);
+             paragraph9.setIndentationRight(50);
+             
+             
+             Paragraph paragraph10 = new Paragraph();
+	         paragraph10.setSpacingAfter(0);
+             paragraph10.setSpacingBefore(0);
+             paragraph10.setAlignment(Element.ALIGN_LEFT);
+             paragraph10.setIndentationLeft(50);
+             paragraph10.setIndentationRight(50);
+        
+             
+             String s1=textAdmissionnum.getText();
+             String s2=textStudentName.getText();
+             String s3=textCourseName.getText();
+             String s4=textTotalFee.getText();
+             String s5=textDiscount.getText();
+             String s6=textPayableAmount.getText();
+             String s7=textPaidAmount.getText();
+             String s8=textDueAmount.getText();
+             String s9=textDate.getText();
+             String s10;
+             
+            
+         
+             Chunk chunk1 = new Chunk(
+                 "STUDENT ID:"+"    "+s1);
+             Chunk chunk2 = new Chunk(
+                     "STUDENT NAME: "+"    "+s2+"                                        ");
+             Chunk chunk3 = new Chunk(
+                     "COURSE NAME:"+"    "+s3+" ");
+             Chunk chunk4 = new Chunk(
+                     "TOTAL FEES:"+"    "+s4);
+             Chunk chunk5 = new Chunk(
+                     " DISCOUNT:"+"    "+s5);
+             Chunk chunk6 = new Chunk(
+                     "PAYABLE AMOUNT :"+"    "+s6);
+             Chunk chunk7 = new Chunk(
+                     " PAID AMOUNT :"+"    "+s7);
+             Chunk chunk8 = new Chunk(
+                     " DUE AMOUNT :"+"    "+s8);
+             Chunk chunk9 = new Chunk(
+                     " DATE :"+"    "+s9);
+             
+             paragraph.add(chunk0);
+             paragraph2.add(chunk2);
+             paragraph2.add(chunk1);
+             paragraph3.add(chunk3);
+             paragraph4.add(chunk4);
+             paragraph5.add(chunk5);
+             paragraph6.add(chunk6);
+             paragraph7.add(chunk7);
+             paragraph8.add(chunk8);
+             paragraph9.add(chunk9);
+             
+             document.add(paragraph);
+             document.add(paragraph2);
+             document.add(paragraph3);
+             document.add(paragraph4);
+             document.add(paragraph5);
+             document.add(paragraph6);
+             document.add(paragraph7);
+             document.add(paragraph8);
+             document.add(paragraph9);
+             if(comboBoxChequeNum.getSelectedItem().equals("Cash")){
+            	 s10="CASH";
+            	 Chunk chunk10=new Chunk("MODE OF PAYMENT:"+s10);
+            	 paragraph10.add(chunk10);
+            	 document.add(paragraph10);
+            	 }
+             else{
+            	 s10="CHEQUE";
+            	 Chunk chunk10=new Chunk("MODE OF PAYMENT:"+s10);
+            	 paragraph10.add(chunk10);
+            	 document.add(paragraph10);
+                 Paragraph paragraph11 = new Paragraph();
+    	         paragraph11.setSpacingAfter(0);
+                 paragraph11.setSpacingBefore(0);
+                 paragraph11.setAlignment(Element.ALIGN_LEFT);
+                 paragraph11.setIndentationLeft(50);
+                 paragraph11.setIndentationRight(50);
+                 
+                 Paragraph paragraph12 = new Paragraph();
+    	         paragraph12.setSpacingAfter(0);
+                 paragraph12.setSpacingBefore(0);
+                 paragraph12.setAlignment(Element.ALIGN_LEFT);
+                 paragraph12.setIndentationLeft(50);
+                 paragraph12.setIndentationRight(50);
+            	 
+                 String s11=textChequeNum.getText();
+            	 Chunk chunk11=new Chunk("CHEQUE NUMBER:"+s11);
+            	 paragraph11.add(chunk11);
+            	 document.add(paragraph11);
+            	 
+            	 String s12=textBankName.getText();
+               	 Chunk chunk12=new Chunk("BANK'S NAME:"+s12);
+               	 paragraph12.add(chunk12);
+               	 document.add(paragraph12);
+            	  }
+             
+	         document.close();
+	         writer.close();
+	      } catch (DocumentException e)
+	      {
+	         e.printStackTrace();
+	      } catch (FileNotFoundException e)
+	      {
+	         e.printStackTrace();
+	      }	 	
+
+	}
 	
 }
