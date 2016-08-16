@@ -9,9 +9,8 @@ public interface CommonSQLConstants {
 	public static String DELETECOURSE_SQL = "DELETE FROM `InstituteProject`.`courses_table` WHERE course_name=?";
 
 	public static String UPDATECOURSE_SQL = "UPDATE `InstituteProject`.`courses_table` SET 'course_name` = ?,`fees` = ?,`course_description` = ?,`duration` = ?,`trainer_name` = ? WHERE `course_name` = ?";
-	public static String VIEWBATCHES_SQL = "";
+	public static String VIEWBATCHES_SQL = "select * from batch_table";
 	public static String VIEWSTUDENTS_SQL="";
-	public static String TAKEATTENDANCE_SQL = "";
 	public static String Trainer_Registration_SQl = "INSERT INTO `amit`.`trainer_registration` (`Trainer_name`, `Trainer_age`, `Trainer_gender`, `Trainer_mobileno`, `Trainer_email`, `Trainer_address`, `Trainer_image`, `Trainer_subject`, `Trainer_hiredate`) VALUES (?,?,?,?,?,?,?,?,?);";
 
 	public static String ENQUIRE_SQL = "INSERT INTO `project`.`enquire_sql`"
@@ -21,5 +20,15 @@ public interface CommonSQLConstants {
 	public static String COURSE_SQL="SELECT * from `project`.`course_sql`";	
 	public static String COUNSELLOR_SQL = "INSERT INTO `counsellordb`.`consellorpage`(`Name`,`Address`,`Phonenumber`,`Qualification`,`Gender`)"
 	+ "VALUES(?,?,?,?,?)";
-	
+	public static String TAKEATTENDANCE_SQL = "Insert into attandance_table (attandance_date, studentname, batchname) Values (?,?,?)";
+	public static String GETSTUDENTLIST(String batchName)	
+	{
+	String VIEWSTUDENTS="select * from student_table where batch_name='"+batchName+"'";
+	return VIEWSTUDENTS;
+	}
+	public static String GETATTANDANCE(String batchname, String studentname, java.util.Date startdate, java.util.Date enddate)
+	{
+	String VIEWATTENDANCE_SQL = "SELECT * FROM attandance_table WHERE studentname='"+studentname+"' and batchname='"+batchname+"' and attandance_date between '"+startdate+"'and '"+enddate+"'";
+	return VIEWATTENDANCE_SQL;
+	}
 }
