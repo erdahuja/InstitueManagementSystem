@@ -1,4 +1,22 @@
-package com.bmpl.counsellorform.view;
+package com.bmpl.ims.users.views;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Enumeration;
+
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+import com.bmpl.ims.users.dto.CounsellorDTO;
 
 public class counsellorview extends JFrame {
 
@@ -64,6 +82,7 @@ public class counsellorview extends JFrame {
 		
 		JButton btnSubmit = new JButton("SUBMIT");
 		btnSubmit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
 					try {
@@ -91,6 +110,7 @@ public class counsellorview extends JFrame {
 		JRadioButton rdbtnMale = new JRadioButton("MALE");
 		ButtonGroup btngroup=new ButtonGroup(); 
 		rdbtnMale.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Enumeration<AbstractButton> allRadioButton=btngroup.getElements();
 				while(allRadioButton.hasMoreElements()) 
@@ -108,6 +128,7 @@ public class counsellorview extends JFrame {
 		
 		JRadioButton rdbtnFemale = new JRadioButton("FEMALE");
 		rdbtnFemale.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Enumeration<AbstractButton> allRadioButton=btngroup.getElements();
 				while(allRadioButton.hasMoreElements()) 
@@ -133,8 +154,8 @@ public class counsellorview extends JFrame {
 		contentPane.add(lblRegistrationForm);
 	}
 	private void dosubmit() throws ClassNotFoundException, SQLException{
-		counsellorDAO counsellorDAO =new counsellorDAO();
-		counsellorDTO counsellorDTO = new counsellorDTO();
+		com.bmpl.ims.users.dao.counsellorDAO counsellorDAO =new com.bmpl.ims.users.dao.counsellorDAO();
+		CounsellorDTO counsellorDTO = new CounsellorDTO();
 		counsellorDTO.setName(nm.getText());
 		counsellorDTO.setAddress(ad.getText());
 		counsellorDTO.setGender(seletedRedioButton);

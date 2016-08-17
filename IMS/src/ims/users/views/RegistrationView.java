@@ -1,4 +1,19 @@
 package com.bmpl.ims.users.views;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
 import com.bmpl.ims.common.utils.CommonMethods;
 import com.bmpl.ims.users.dao.RegisterDAO;
 import com.bmpl.ims.users.dto.RegisterDTO;
@@ -105,6 +120,7 @@ public class RegistrationView extends JFrame {
 
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				doSubmit();
 			}
@@ -114,6 +130,7 @@ public class RegistrationView extends JFrame {
 
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				doExit();
 			}
@@ -146,7 +163,7 @@ public class RegistrationView extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(433, 253, 145, 54);
 		contentPane.add(scrollPane);
-		frame.setVisible(true);
+
 		
 
 		listModel = new DefaultListModel<String>();
@@ -177,7 +194,7 @@ public class RegistrationView extends JFrame {
 		contentPane.add(list2);
 		
 		try {
-			batchList = CommonMethods.getCourse(); //change to getBatch();
+			batchList = CommonMethods.getBatches(); //change to getBatch();
 			for (String batches : batchList){
 				listModel1.addElement(batches);
 			}
@@ -186,7 +203,7 @@ public class RegistrationView extends JFrame {
 			e.printStackTrace();
 		}
 		
-		
+		frame.setVisible(true);
 
 	}
 

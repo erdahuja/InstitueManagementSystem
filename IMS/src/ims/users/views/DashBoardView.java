@@ -1,6 +1,28 @@
 package com.bmpl.ims.users.views;
 
-import com.bmpl.ims.common.utils.CommonMethods;
+import java.awt.Image;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Vector;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Font;
+import java.awt.Frame;
 
 class Item {
 	private String className;
@@ -33,26 +55,28 @@ public class DashBoardView extends JFrame {
 	private Vector model2;
 	private Vector model3;
 	private Vector model4;
-	private JTextArea lblWelcome ;
+	private JTextArea lblWelcome;
 	DateFormat format;
 	String stringTime;
 	String misc;
 	private JLabel lblUpdate;
 	private JLabel lblFees;
-	private JComboBox comboBox_1 ;
+	private JComboBox comboBox_1;
+	private JComboBox comboBox_3;
 	private JFrame frame = new JFrame();
+	private JButton button;
+	private JButton button_2 ;
 
 	public static void main(String[] args) throws IOException {
 
-		new DashBoardView("admin","string2");
+		new DashBoardView("admin", "string2");
 
-		
 	}
 
-	
-	void loadClock(){
-		
+	void loadClock() {
+
 		javax.swing.Timer t = new javax.swing.Timer(1000, new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Calendar now = Calendar.getInstance();
 				int h = now.get(Calendar.HOUR_OF_DAY);
@@ -67,16 +91,14 @@ public class DashBoardView extends JFrame {
 		});
 		t.start();
 	}
-	
+
 	public DashBoardView(String selecteditem, String userid) throws IOException {
-		
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 
 		frame.setTitle("Institue Management System");
 
-	
-		
-		Image img = ImageIO.read(new File("/home/deepak/Downloads/IMS/src/com/bmpl/ims/users/views/banner_CMS.jpg"));
+		Image img = ImageIO.read(new File("/home/deepak/Downloads/IMS/images/banner_CMS.jpg"));
 		// format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		loadClock();
 
@@ -88,44 +110,97 @@ public class DashBoardView extends JFrame {
 		lblFees = new JLabel("Fees");
 		lblFees.setBounds(111, 488, 70, 15);
 		frame.setContentPane(contentPane);
+		
+		
 		model2 = new Vector();
 		model2.addElement(new Item("UpdateCourseView", "Course"));
-		model2.addElement(new Item("StudentView", "Student"));// Change key
-																// after adding
-															// screens
+		model2.addElement(new Item("StudentView", "Student"));
 		model2.addElement(new Item("TeacherView", "Trainer"));
 		model2.addElement(new Item("AddBatchView", "Batch"));
 
-		comboBox_1 = new JComboBox(model2);
+		comboBox_1 = new JComboBox(model2);// addmission screens
 		comboBox_1.setBounds(299, 342, 124, 24);
+
+		lblUpdate = new JLabel("Update");
+		lblUpdate.setBounds(111, 347, 70, 15);
+
+		button = new JButton("Go");
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Item item = (Item) comboBox_1.getSelectedItem();
+				System.out.println(item.getClassName());
+
+				try {
+					Class.forName("com.bmpl.ims.users.views." + item.getClassName()).newInstance();
+
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+		button.setBounds(526, 342, 117, 25);
+
+		model4 = new Vector();
+		model4.addElement(new Item("FeePaymentView", "Fee Payment"));
+		model4.addElement(new Item("AddExpenseView", "Add Expense"));
 		
-		  lblUpdate = new JLabel("Update");
-			lblUpdate.setBounds(111, 347, 70, 15);
-			
-		
-		if(selecteditem.equalsIgnoreCase("admin")){
+		comboBox_3 = new JComboBox(model4);
+		comboBox_3.setBounds(299, 480, 124, 24);
+
+		 button_2 = new JButton("Go");
+		button_2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Item item = (Item) comboBox_3.getSelectedItem();
+				System.out.println(item.getClassName());
+
+				try {
+					Class.forName("com.bmpl.ims.users.views." + item.getClassName()).newInstance();
+
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+		button_2.setBounds(526, 480, 117, 25);
+
+		if (selecteditem.equalsIgnoreCase("admin")) {
 			contentPane.add(lblUpdate);
 			contentPane.add(lblFees);
 			contentPane.add(comboBox_1);
-		}
-		else{
+			contentPane.add(comboBox_3);
+			contentPane.add(button);
+			contentPane.add(button_2);
+		} else {
 			
+			
+
 		}
-		
 
 		JLabel lblAdd = new JLabel("ADD");
 		lblAdd.setBounds(111, 273, 70, 15);
 		contentPane.add(lblAdd);
 
-	  
-		
-
 		JLabel lblAttendance = new JLabel("Attendance");
 		lblAttendance.setBounds(111, 427, 114, 15);
 		contentPane.add(lblAttendance);
-
-		 
-		
 
 		JLabel lblFollowup = new JLabel("Follow Ups");
 		lblFollowup.setBounds(111, 545, 114, 15);
@@ -144,21 +219,13 @@ public class DashBoardView extends JFrame {
 
 		contentPane.add(comboBox);
 
-		
-
-		
-
 		model3 = new Vector();
 		model3.addElement(new Item("TakeAttendanceView", "Take Attendance"));
-		model3.addElement(new Item("AddBatchView", "View Attendance"));
+		model3.addElement(new Item("VisitAttendanceView", "View Attendance"));
 
 		JComboBox comboBox_2 = new JComboBox(model3);
 		comboBox_2.setBounds(299, 406, 124, 24);
 		contentPane.add(comboBox_2);
-
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(299, 480, 124, 24);
-		contentPane.add(comboBox_3);
 
 		JButton btnGo = new JButton("Go");
 		btnGo.addActionListener(new ActionListener() {
@@ -197,34 +264,6 @@ public class DashBoardView extends JFrame {
 		lblWelcome.setBounds(1032, 134, 250, 77);
 		contentPane.add(lblWelcome);
 
-		
-
-		JButton button = new JButton("Go");
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Item item = (Item) comboBox_1.getSelectedItem();
-				System.out.println(item.getClassName());
-
-				try {
-					Class.forName("com.bmpl.ims.users.views." + item.getClassName()).newInstance();
-
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		});
-		button.setBounds(526, 342, 117, 25);
-		contentPane.add(button);
-
 		JButton button_1 = new JButton("Go");
 		button_1.addActionListener(new ActionListener() {
 			@Override
@@ -251,48 +290,25 @@ public class DashBoardView extends JFrame {
 		button_1.setBounds(526, 406, 117, 25);
 		contentPane.add(button_1);
 
-		JButton button_2 = new JButton("Go");
-		button_2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Item item = (Item) comboBox_3.getSelectedItem();
-				System.out.println(item.getClassName());
-
-				try {
-					Class.forName("com.bmpl.ims.users.views." + item.getClassName()).newInstance();
-
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		});
-		button_2.setBounds(526, 480, 117, 25);
-		contentPane.add(button_2);
-
 		JLabel lblNewLabel = new JLabel(new ImageIcon(img));
 		lblNewLabel.setBounds(0, 12, 1031, 254);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnNewButton = new JButton("Send Notice");
 		btnNewButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new SendNotice();
 			}
 		});
 		btnNewButton.setBounds(1032, 295, 217, 25);
 		contentPane.add(btnNewButton);
-		frame.setVisible(true);
 		
+		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.setBounds(1032, 48, 203, 25);
+		contentPane.add(btnLogOut);
+		frame.setVisible(true);
+
 	}
-
-
 
 }

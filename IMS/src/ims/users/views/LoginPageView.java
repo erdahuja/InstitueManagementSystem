@@ -6,6 +6,20 @@ package com.bmpl.ims.users.views;
 */
 
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 import com.bmpl.ims.users.dao.LoginDAO;
 import com.bmpl.ims.users.dto.UserDTO;
 
@@ -54,6 +68,7 @@ public class LoginPageView extends JFrame {
 		
 		JButton btnSubmit = new JButton("SUBMIT");
 		btnSubmit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Login();
 			}
@@ -64,6 +79,7 @@ public class LoginPageView extends JFrame {
 		
 		JButton btnReset = new JButton("RESET");
 		btnReset.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			Reset();
 			}
@@ -74,6 +90,7 @@ public class LoginPageView extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				selecteditem=(String)comboBox.getSelectedItem();
 			}
@@ -97,7 +114,7 @@ public class LoginPageView extends JFrame {
 			userDTO.setUserid(txtuser.getText());
 			userDTO.setPassword(txtpassword.getText());
 			userDTO.setRole(selecteditem);
-			userDTO.setRole(selecteditem);
+			
 			if(selecteditem.equalsIgnoreCase("admin"))
 			{		
 			try {

@@ -1,5 +1,22 @@
 package com.bmpl.ims.users.views;
 
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 import com.bmpl.ims.common.utils.CommonMethods;
 
 class MyFilter implements FilenameFilter {
@@ -86,6 +103,7 @@ public class SendNotice extends JFrame {
 		btnUpload = new JButton("Upload your \".word\" File");
 		btnUpload.setBounds(179, 62, 222, 25);
 		btnUpload.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				fileChooser();
 			}
@@ -104,7 +122,14 @@ public class SendNotice extends JFrame {
 
 		JButton btnChooseBatch = new JButton("Choose Batch");
 		btnChooseBatch.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				
+		
+				
+				batchWindow();
+					
+			
 				
 			}
 		});
@@ -117,6 +142,7 @@ public class SendNotice extends JFrame {
 
 		JButton btnSendEmail = new JButton("Send Email");
 		btnSendEmail.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -125,5 +151,37 @@ public class SendNotice extends JFrame {
 
 		frame.setVisible(true);
 
+	}
+
+	private void batchWindow() {
+		JFrame frame2=new JFrame();
+		
+		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame2.setTitle("Choose Batch");
+		frame2.setBounds(100, 100, 534, 359);
+		DefaultListModel listm=new DefaultListModel<>();
+		JButton btn=new JButton("Select");
+		
+		JList list=new JList(listm);
+		list.setBounds(50,50,50,50);
+		getContentPane().add(btn);
+		btn.setBounds(155, 255, 150, 50);
+		getContentPane().add(list);
+		ArrayList<String> listb;
+		try {
+			listb =CommonMethods.getBatches();
+					
+			for(String name:listb)
+			listm.addElement(name);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		frame2.setContentPane(getContentPane());
+		frame2.setVisible(true);
+		
+		
 	}
 }

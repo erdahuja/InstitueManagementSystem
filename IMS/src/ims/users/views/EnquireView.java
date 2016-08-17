@@ -1,9 +1,29 @@
 package com.bmpl.ims.users.views;
 
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import com.bmpl.ims.users.dao.EnquireDAO;
 import com.bmpl.ims.users.dto.EnquireDTO;
 
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.awt.*;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.border.BevelBorder;
 
 public class EnquireView extends JFrame {
 
@@ -36,6 +56,7 @@ public class EnquireView extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					EnquireView frame = new EnquireView();

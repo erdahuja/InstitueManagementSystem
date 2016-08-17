@@ -1,14 +1,44 @@
 package com.bmpl.ims.users.views;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import com.bmpl.ims.common.dao.CommonSQLConstants;
+import com.bmpl.ims.common.utils.CommonMethods;
+import com.bmpl.ims.users.dao.TakeAttendanceDAO;
+import com.bmpl.ims.users.dto.TakeAttendanceDTO;
+
 public class TakeAttendanceView extends JFrame {
 
 	private JPanel contentPane;
 	ArrayList<String> comboItems = new ArrayList<String>();
 	DefaultListModel listModel1 = new DefaultListModel();
 	DefaultListModel listModel2 = new DefaultListModel();
-JFrame frame=new JFrame();
-	ArrayList<String> list;
 
+	ArrayList<String> list;
+	private static Date date=null;
+	private JTextField takedate;
+	private List<String> listCopy;
+	private String batchName=null;
+	private java.sql.Date sqlDate;
+	JFrame frame=new JFrame();
 	public static void main(String[] args) {
 
 		new TakeAttendanceView();
@@ -17,9 +47,9 @@ JFrame frame=new JFrame();
 	}
 
 	public TakeAttendanceView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 717, 395);
-		contentPane = new JPanel();
+	  contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		frame.setContentPane(contentPane);
@@ -31,7 +61,6 @@ JFrame frame=new JFrame();
 		JList<String> list_1 = new JList<String>(listModel1);
 		list_1.setValueIsAdjusting(true);
 		list_1.setBounds(29, 62, 160, 271);
-		// contentPane.add(list_1);
 
 		JLabel lblChoose = new JLabel("Choose Batch :");
 		lblChoose.setBounds(220, 35, 131, 15);
@@ -41,27 +70,25 @@ JFrame frame=new JFrame();
 		comboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("combo");
 				list = new ArrayList<>();
-				String batchName = (String) comboBox.getSelectedItem();
+				try {
+					batchName = (String) comboBox.getSelectedItem();
+				
+					list.add(CommonSQLConstants.GETSTUDENTLIST(batchName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				listModel1.clear();
 				listModel2.clear();
-				// try {
-				// list= CommonMethods.getStudents();
-				list.add("n1");
-				list.add("n2");
-				list.add("n3");
-				list.add("n4");
-		
 				System.out.println(list.size());
 				int i = 1;
 				if (!list.isEmpty()) {
 					for (String name : list) {
-						//System.out.println(name + "\n");
+						System.out.println(name + "\n");
 						if (i < 10)
-							listModel1.addElement(i++ + " :     " + name);
+							listModel1.addElement(name);
 						else
-							listModel1.addElement(i++ + " :   " + name);
+							listModel1.addElement(name);
 					}
 
 				}
@@ -76,46 +103,39 @@ JFrame frame=new JFrame();
 			}
 
 		});
-		comboBox.setBounds(369, 30, 131, 24);
 
-		// try {
-		// comboItems = CommonMethods.getBatches();
-		comboItems.add("1");
-		comboItems.add("2");
+		comboBox.setBounds(369, 30, 131, 24);
+		ArrayList<String> list=null;
+		try {
+			list=CommonMethods.getBatches();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		for(String batchlist: list)
+		{
+			comboItems.add(batchlist);
+		}
 
 		if (!comboItems.isEmpty()) {
 			for (String name : comboItems) {
 				comboBox.addItem(name);
-
 			}
 
 		}
-
-		/*
-		 * } catch (SQLException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 */
-
 		contentPane.add(comboBox);
 
-		JList<String> list_2 = new JList<String>(listModel2);
+		JList<String> list_2 = new JList<>(listModel2);
 		list_2.setBounds(525, 62, 160, 271);
-
-		// contentPane.add(list_2);
 
 		JButton btnSelect = new JButton("Select");
 		btnSelect.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				listModel2.clear();
-			
-				
-				List<String> listCopy = list_1.getSelectedValuesList();
-				for (String name : listCopy)
-				
-						listModel2.addElement(name);
-					
-					
+				listCopy = list_1.getSelectedValuesList();
+				for (String name : listCopy)		
+					listModel2.addElement(name);
 			}
 		});
 		btnSelect.setBounds(281, 97, 117, 25);
@@ -123,6 +143,7 @@ JFrame frame=new JFrame();
 		contentPane.add(btnSelect);
 
 		JButton btnRefres = new JButton("Cancel");
+		btnRefres.setBackground(Color.WHITE);
 		btnRefres.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -131,24 +152,17 @@ JFrame frame=new JFrame();
 
 			}
 		});
-		btnRefres.setBounds(281, 152, 117, 25);
+		btnRefres.setBounds(281, 151, 122, 30);
 		contentPane.add(btnRefres);
 
 		JButton btnMarkPre = new JButton("Mark Present");
 		btnMarkPre.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (!list_1.isSelectionEmpty()) {
-					String batch_name = (String) comboBox.getSelectedItem();
-					// chose students in db n mark attendance
-
-				} else {
-					JOptionPane.showMessageDialog(null, "No Student Selected ");
-				}
-
+			public void actionPerformed(ActionEvent e) {
+				takeattendance();
 			}
 		});
-		btnMarkPre.setBounds(266, 308, 139, 25);
+		
+		btnMarkPre.setBounds(281, 304, 140, 25);
 		contentPane.add(btnMarkPre);
 
 		JLabel lblSelectedStudents = new JLabel("Selected Students");
@@ -172,8 +186,35 @@ JFrame frame=new JFrame();
 		scrollPane_1.setColumnHeaderView(lblSNoNam);
 		
 		frame.setVisible(true);
-		Date date = new Date();
+		date = new Date();
 		frame.setTitle("Mark Attendance " + date.toString());
 
 	}
+	
+	public void takeattendance()
+	{
+		TakeAttendanceDTO takeattendancedto=new TakeAttendanceDTO();
+		TakeAttendanceDAO takeattendancedao=new TakeAttendanceDAO();
+		takeattendancedto.setBatchname(batchName);
+		takeattendancedto.setStudent(listCopy);
+		Date selectedDate = date;
+		sqlDate=new java.sql.Date(selectedDate.getTime());
+		takeattendancedto.setDate(sqlDate);
+		try{
+		boolean isFound=takeattendancedao.addattendancetake(takeattendancedto);
+		if(isFound)
+		{
+			JOptionPane.showMessageDialog(this, "Attdndance done.........");
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this, "Attendance Not Update......");
+		}
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

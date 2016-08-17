@@ -1,6 +1,31 @@
 package com.bmpl.ims.users.views;
 
-import com.bmpl.ims.common.utils.DateLabelFormatter;
+import java.awt.Choice;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.sql.SQLException;
+import java.util.Date;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.BevelBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.DateFormatter;
+
 import com.bmpl.ims.users.dao.TrainerDao;
 import com.bmpl.ims.users.dto.TrainerDTO;
 
@@ -150,7 +175,8 @@ public class TrainerRegistration extends JFrame {
 		btnSubmit.setBounds(424, 360, 117, 40);
 		btnSubmit.addActionListener(new ActionListener()
 		{
-		  public void actionPerformed(ActionEvent e){
+		  @Override
+		public void actionPerformed(ActionEvent e){
 			  
 			  try {
 				getData();
@@ -221,12 +247,12 @@ public class TrainerRegistration extends JFrame {
 		UtilDateModel model = new UtilDateModel();
 		
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-	datePicker = new JDatePickerImpl(datePanel,new DateLabelFormatter());
+	datePicker = new JDatePickerImpl(datePanel,new DateFormatter());
 
 		 datePicker.setBounds(176, 423, 196, 25);
 		getContentPane().add(datePicker);
 		
-		lblImage = new JLabel("");
+		lblImage = new JLabel("Upload Image");
 		
 		lblImage.addMouseListener(new MouseAdapter() {
 			@Override
@@ -268,7 +294,7 @@ public class TrainerRegistration extends JFrame {
 		        path = fc.getSelectedFile().getPath();
 		      
 		    
-		    lblImage.setIcon((ImageIcon) ResizeImage(path));
+		    lblImage.setIcon(ResizeImage(path));
 		    if(lblImage!=null){
 		    	JOptionPane.showMessageDialog(this, "image found");
 		    }

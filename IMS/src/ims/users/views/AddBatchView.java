@@ -1,9 +1,24 @@
 package com.bmpl.ims.users.views;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import com.bmpl.ims.common.utils.CommonMethods;
 import com.bmpl.ims.users.dao.BatchDAO;
 import com.bmpl.ims.users.dto.BatchDTO;
-//import com.toedter.calendar.JDateChooser;
-import com.bmpl.ims.users.dto.CourseDTO;
 
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -25,6 +40,7 @@ public class AddBatchView extends JFrame {
 	private JTextField starttime;
 	private JTextField endtime;
 	private JComboBox comboBox1;
+	
 	 JFrame frame = new JFrame();
 	
 	public static void main(String[] args) {
@@ -36,10 +52,12 @@ public class AddBatchView extends JFrame {
 
 		public AddBatchView() {
 		
-		setTitle("AddBatch");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 479, 605);
-		getContentPane().setLayout(null);
+		
+		frame.setTitle("AddBatch");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 479, 605);
+		frame.getContentPane().setLayout(null);
+		frame.setContentPane(getContentPane());
 		
 		JLabel lblBatchname = new JLabel("CourseName");
 		lblBatchname.setLabelFor(this);
@@ -74,12 +92,14 @@ public class AddBatchView extends JFrame {
 		
 		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				selecteditem1=(String)comboBox.getSelectedItem();
 			}
 		});
 		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				selecteditem=(String)comboBox.getSelectedItem();
 			}
@@ -89,12 +109,10 @@ public class AddBatchView extends JFrame {
 		BatchDAO BatchDao = new BatchDAO();
 		ArrayList<String> list=null;
 		try {
-			list = BatchDAO.getCourse();
-		} catch (ClassNotFoundException e1) {
+			list = CommonMethods.getCourse();
+		} catch (Exception e1) {
 			e1.printStackTrace();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		} 
 		for(String order: list)
 		{
 		comboBox.addItem(order);
@@ -124,6 +142,7 @@ public class AddBatchView extends JFrame {
 		
 		JButton btnAddBatch = new JButton("Add Batch");
 		btnAddBatch.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				addbatch();
 			}
@@ -134,6 +153,7 @@ public class AddBatchView extends JFrame {
 		
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Reset();
 			}

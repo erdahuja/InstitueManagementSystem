@@ -1,5 +1,22 @@
 
  package com.bmpl.ims.users.views;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import com.bmpl.ims.users.dao.TeacherDAO;
 
 
@@ -62,6 +79,7 @@ public class TeacherView extends JFrame {
 		
 		JButton btnView = new JButton("View");
 		btnView.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				bringCourses();
 			}
@@ -71,6 +89,7 @@ public class TeacherView extends JFrame {
 		
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				updateCourse();
 			}
@@ -85,6 +104,7 @@ public class TeacherView extends JFrame {
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				deleteCourse();
 				listModel.clear();
@@ -177,7 +197,7 @@ public class TeacherView extends JFrame {
 		
 		try {
 
-			teacherDAO.updateCourse(item);
+			TeacherDAO.updateCourse(item);
 			
 
 		} catch (SQLException e) {

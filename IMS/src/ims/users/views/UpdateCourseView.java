@@ -1,7 +1,24 @@
 package com.bmpl.ims.users.views;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import com.bmpl.ims.common.utils.CommonMethods;
 import com.bmpl.ims.users.dao.CoursesDAO;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class UpdateCourseView extends JFrame {
 
