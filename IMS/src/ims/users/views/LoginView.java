@@ -6,19 +6,6 @@ package com.bmpl.ims.users.views;
 * This is a Login Page Design 
 */
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
 import com.bmpl.ims.users.dao.LoginDAO;
 import com.bmpl.ims.users.dto.UserDTO;
 

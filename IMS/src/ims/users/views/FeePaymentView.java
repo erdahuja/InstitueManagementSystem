@@ -1,38 +1,9 @@
 package com.bmpl.ims.users.views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import com.bmpl.ims.common.dao.CommonDAO;
-import com.bmpl.ims.common.dao.CommonSQLConstants;
 import com.bmpl.ims.users.dao.FeePayamentDAO;
 
 import com.bmpl.ims.users.dao.FeePayamentDAO.function;
 import com.bmpl.ims.users.dto.FeePaymentDTO;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import javax.swing.JFormattedTextField;
-import javax.swing.JTextField;
-import java.awt.Choice;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class FeePaymentView extends JFrame {
 

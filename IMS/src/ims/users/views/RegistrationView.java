@@ -1,20 +1,4 @@
 package com.bmpl.ims.users.views;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
 import com.bmpl.ims.common.utils.CommonMethods;
 import com.bmpl.ims.users.dao.RegisterDAO;
 import com.bmpl.ims.users.dto.RegisterDTO;

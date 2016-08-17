@@ -1,23 +1,7 @@
 package com.bmpl.ims.users.views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.sql.SQLException;
-
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import com.bmpl.ims.users.dao.AddExpenseDAO;
 import com.bmpl.ims.users.dto.AddExpenseDTO;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class AddExpenseView extends JFrame {
 

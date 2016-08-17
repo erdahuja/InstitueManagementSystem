@@ -1,7 +1,5 @@
 package com.bmpl.ims.users.views;
 
-import javax.swing.JFrame;
-
 public class WelcomeView extends JFrame {
 
 	public static void main(String[] args) {

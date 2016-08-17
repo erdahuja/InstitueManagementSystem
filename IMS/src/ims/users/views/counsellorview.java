@@ -1,26 +1,5 @@
 package com.bmpl.counsellorform.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.Enumeration;
-
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import com.bmpl.counsellorform.DAO.counsellorDAO;
-import com.bmpl.counsellorform.DTO.counsellorDTO;
-import javax.swing.JTextArea;
-import javax.swing.JCheckBox;
-import javax.swing.JRadioButton;
-import java.awt.Font;
-
 public class counsellorview extends JFrame {
 
 	private JPanel contentPane;

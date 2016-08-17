@@ -1,22 +1,5 @@
 package com.bmpl.ims.users.views;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
 import com.bmpl.ims.users.dao.BatchDAO;
 import com.bmpl.ims.users.dto.BatchDTO;
 //import com.toedter.calendar.JDateChooser;
@@ -25,9 +8,6 @@ import com.bmpl.ims.users.dto.CourseDTO;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-import java.awt.ScrollPane;
-import java.awt.List;
-import javax.swing.JList;
 
 public class AddBatchView extends JFrame {
 
@@ -109,7 +89,7 @@ public class AddBatchView extends JFrame {
 		BatchDAO BatchDao = new BatchDAO();
 		ArrayList<String> list=null;
 		try {
-			list = BatchDao.getCourse();
+			list = BatchDAO.getCourse();
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (SQLException e1) {

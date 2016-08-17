@@ -1,27 +1,9 @@
 package com.bmpl.ims.users.views;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
-
 import com.bmpl.ims.users.dao.EnquireDAO;
 import com.bmpl.ims.users.dto.EnquireDTO;
 
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import java.awt.*;
 
 public class EnquireView extends JFrame {
 
@@ -42,13 +24,13 @@ public class EnquireView extends JFrame {
 	private JTextField txtEnterYourQualifications;
 	private JTextField txtFriendOrOther;
 	private JTextField txtEnterEmail;
-	private UtilDateModel model;
-	private JDatePanelImpl datePanel;
-	private JDatePickerImpl datePicker;
-	private String selecteditem;
-	private java.sql.Date sqlDate;
-	private JTextField textField;
-	JList list = new JList();
+	private String course[]={"Java", "Adv. Java", "UI", "MEAN", "C", "C++", "Php"};
+	public DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	java.sql.Date date;
+	DefaultListModel<String> listModel;
+	JTextArea textUpdateArea;
+	//private Jlist String list;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -71,7 +53,7 @@ public class EnquireView extends JFrame {
 	public EnquireView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
-		setSize(603,639);
+		setSize(559,619);
 		
 		
 		JLabel lblEnquiry = new JLabel("ENQUIRY");
@@ -96,22 +78,22 @@ public class EnquireView extends JFrame {
 		getContentPane().add(lblAddress);
 		
 		txtFirstName = new JTextField();
-		txtFirstName.setBounds(248, 52, 125, 20);
+		txtFirstName.setBounds(214, 52, 125, 20);
 		getContentPane().add(txtFirstName);
 		txtFirstName.setColumns(10);
 				
 		txtLastName = new JTextField();
-		txtLastName.setBounds(399, 52, 125, 20);
+		txtLastName.setBounds(366, 52, 125, 20);
 		getContentPane().add(txtLastName);
 		txtLastName.setColumns(10);
 		
 		txtAddress = new JTextField();
-		txtAddress.setBounds(248, 85, 277, 20);
+		txtAddress.setBounds(214, 85, 277, 20);
 		getContentPane().add(txtAddress);
 		txtAddress.setColumns(10);
 		
 		txtAddress_1 = new JTextField();
-		txtAddress_1.setBounds(248, 116, 277, 20);
+		txtAddress_1.setBounds(214, 116, 277, 20);
 		getContentPane().add(txtAddress_1);
 		txtAddress_1.setColumns(10);
 		
@@ -124,12 +106,12 @@ public class EnquireView extends JFrame {
 		getContentPane().add(lblContact);
 		
 		txtMobile = new JTextField();
-		txtMobile.setBounds(248, 147, 125, 20);
+		txtMobile.setBounds(214, 147, 125, 20);
 		getContentPane().add(txtMobile);
 		txtMobile.setColumns(10);
 		
 		txtHome = new JTextField();
-		txtHome.setBounds(399, 147, 125, 20);
+		txtHome.setBounds(366, 147, 125, 20);
 		getContentPane().add(txtHome);
 		txtHome.setColumns(10);
 		
@@ -150,12 +132,12 @@ public class EnquireView extends JFrame {
 		getContentPane().add(lblPreferredTime);
 		
 		txtTimeSlot = new JTextField();
-		txtTimeSlot.setBounds(248, 292, 125, 20);
+		txtTimeSlot.setBounds(214, 292, 125, 20);
 		getContentPane().add(txtTimeSlot);
 		txtTimeSlot.setColumns(10);
 		
 		txtTimeSlotii = new JTextField();
-		txtTimeSlotii.setBounds(399, 292, 125, 20);
+		txtTimeSlotii.setBounds(366, 292, 125, 20);
 		getContentPane().add(txtTimeSlotii);
 		txtTimeSlotii.setColumns(10);
 		
@@ -168,12 +150,12 @@ public class EnquireView extends JFrame {
 		getContentPane().add(lblFname);
 		
 		txtFirstName_1 = new JTextField();
-		txtFirstName_1.setBounds(248, 323, 125, 20);
+		txtFirstName_1.setBounds(214, 323, 125, 20);
 		getContentPane().add(txtFirstName_1);
 		txtFirstName_1.setColumns(10);
 		
 		txtLastName_1 = new JTextField();
-		txtLastName_1.setBounds(399, 323, 125, 20);
+		txtLastName_1.setBounds(366, 323, 125, 20);
 		getContentPane().add(txtLastName_1);
 		txtLastName_1.setColumns(10);
 		
@@ -186,12 +168,12 @@ public class EnquireView extends JFrame {
 		getContentPane().add(lblFcontact);
 		
 		txtMobile_1 = new JTextField();
-		txtMobile_1.setBounds(248, 353, 125, 20);
+		txtMobile_1.setBounds(214, 353, 125, 20);
 		getContentPane().add(txtMobile_1);
 		txtMobile_1.setColumns(10);
 		
 		txtOther = new JTextField();
-		txtOther.setBounds(399, 354, 125, 20);
+		txtOther.setBounds(366, 353, 125, 20);
 		getContentPane().add(txtOther);
 		txtOther.setColumns(10);
 		
@@ -204,7 +186,7 @@ public class EnquireView extends JFrame {
 		getContentPane().add(lblUniversity);
 		
 		txtEnterUniversityName = new JTextField();
-		txtEnterUniversityName.setBounds(247, 418, 277, 20);
+		txtEnterUniversityName.setBounds(214, 418, 277, 20);
 		getContentPane().add(txtEnterUniversityName);
 		txtEnterUniversityName.setColumns(10);
 		
@@ -217,7 +199,7 @@ public class EnquireView extends JFrame {
 		getContentPane().add(lblQualifications);
 		
 		txtEnterYourQualifications = new JTextField();
-		txtEnterYourQualifications.setBounds(248, 385, 276, 20);
+		txtEnterYourQualifications.setBounds(215, 385, 276, 20);
 		getContentPane().add(txtEnterYourQualifications);
 		txtEnterYourQualifications.setColumns(10);
 		
@@ -230,7 +212,7 @@ public class EnquireView extends JFrame {
 		getContentPane().add(lblReferredBy);
 		
 		txtFriendOrOther = new JTextField();
-		txtFriendOrOther.setBounds(248, 452, 276, 20);
+		txtFriendOrOther.setBounds(215, 452, 276, 20);
 		getContentPane().add(txtFriendOrOther);
 		txtFriendOrOther.setColumns(10);
 		
@@ -243,64 +225,58 @@ public class EnquireView extends JFrame {
 		getContentPane().add(lblEmail);
 		
 		txtEnterEmail = new JTextField();
-		txtEnterEmail.setBounds(248, 178, 276, 20);
+		txtEnterEmail.setBounds(215, 181, 276, 20);
 		getContentPane().add(txtEnterEmail);
 		txtEnterEmail.setColumns(10);
 		
 		JButton btnAddEnquiry = new JButton("Add Enquiry");
 		btnAddEnquiry.setBackground(Color.LIGHT_GRAY);
-		btnAddEnquiry.setBounds(248, 543, 101, 23);
+		btnAddEnquiry.setBounds(227, 518, 101, 23);
 		getContentPane().add(btnAddEnquiry);
 		
-		model = new UtilDateModel();
-		datePanel = new JDatePanelImpl(model);
-		datePicker = new JDatePickerImpl(datePanel);
-		datePicker.setBounds(248, 483, 276, 20);
-		getContentPane().add(datePicker);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(247, 212, 277, 69);
+		scrollPane.setBounds(214, 212, 277, 69);
 		getContentPane().add(scrollPane);
 		
-		 try {
-			list = new JList(EnquireDAO.getCourse().toArray());
-			list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-			scrollPane.setViewportView(list);
-		} catch (ClassNotFoundException | SQLException e1) {
-			e1.printStackTrace();
-		}
+		JList list = new JList(course);
+		list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		scrollPane.setViewportView(list);
 		
+		/*listModel = new DefaultListModel<String>();
 		
-		
-		JLabel label_11 = new JLabel("12.");
-		label_11.setBounds(33, 491, 16, 14);
-		getContentPane().add(label_11);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(58, 491, 175, 14);
-		getContentPane().add(lblNewLabel);
-		lblNewLabel.setText("When would you like \r\nus to call you?");
+		JList<String> courseList = new JList<String>(listModel);
+		courseList.setValueIsAdjusting(true);
+		courseList.addListSelectionListener(new ListSelectionListener(){
+			EnquireDAO enquireDAO = new EnquireDAO();
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				textUpdateArea.setVisible(true);
+				textUpdateArea.setText("");
+				try{
+				textUpdateArea.setText(enquireDAO.getCourse());	
+			}catch(Exception e){
+				
+				
+			}
+			}});
+		scrollPane.setViewportView(courseList);
+		//courseList.setBounds(arg0, arg1, arg2, arg3);
+		//list1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		////setContentPane(contentPane);
+*/		
 		
 		btnAddEnquiry.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				addEnquiry();
-				getCurrentTimeStamp();
-				EnquireView.this.setVisible(false);
-				EnquireView.this.dispose();
-				
+				//setDateTime();
 			}
 			
 		});
 		
 	}
 	
-	public static java.sql.Timestamp getCurrentTimeStamp() {
-
-		java.util.Date today = new java.util.Date();
-		return new java.sql.Timestamp(today.getTime());
-	}
 
 	private void addEnquiry(){
 		EnquireDAO enquireDAO = new EnquireDAO();
@@ -312,7 +288,7 @@ public class EnquireView extends JFrame {
 		enquireDTO.setEmail(txtEnterEmail.getText());
 		enquireDTO.setMobileContact(txtMobile.getText());
 		enquireDTO.setOtherContact(txtHome.getText());
-//		enquireDTO.setCoursename();	
+		//enquireDTO.setCourse(course);
 		enquireDTO.setSlot1(txtTimeSlot.getText());
 		enquireDTO.setSlot2(txtTimeSlotii.getText());
 		enquireDTO.setFatherFirstName(txtFirstName_1.getText());
@@ -323,6 +299,14 @@ public class EnquireView extends JFrame {
 		enquireDTO.setQualification(txtEnterYourQualifications.getText());
 		enquireDTO.setReference(txtFriendOrOther.getText());
 		
+		//get time of enquiry
+		Calendar now = Calendar.getInstance();
+		String enquireDateTime = dateFormat.format(now.getTime());
+	    /*long datesql=enquireDateTime;
+		java.sql.Date date=new Date(datesql);
+		*/System.out.println(enquireDateTime);
+	    //date = (Date)enquireDateTime;
+		//date = DateFormat.format(now.getTime());
 	    try {
 			if(enquireDAO.addEnquire(enquireDTO)){
 				System.out.println(enquireDTO);
