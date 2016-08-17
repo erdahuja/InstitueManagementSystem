@@ -94,7 +94,30 @@ public static ArrayList<String> getStudents() throws SQLException {
 			con.close();
 		}
 		return list;
-
 	}
+	public static ArrayList<String> getBatches() throws SQLException {
+		
+		String sql = CommonSQLConstants.VIEWBATCHES_SQL;
+		Connection con = null;
+		Statement stmt=null;
+		ResultSet rs;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			con = CommonDAO.getConnection();
+			stmt=con.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				BatchDTO batchdto=new BatchDTO();
+				batchdto.setBatchname(rs.getString("batchname"));
+				list.add(batchdto.getBatchname());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			
 
+		} finally {
+			con.close();
+		}
+		return list;
+	}
 }
