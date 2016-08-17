@@ -17,14 +17,8 @@ public class EnquireDTO {
 	private String address1;
 	private String address2;
 	private String email;
-	private String coursename;	
 	
-	public String getCoursename() {
-		return coursename;
-	}
-	public void setCoursename(String coursename) {
-		this.coursename = coursename;
-	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -129,7 +123,7 @@ public class EnquireDTO {
 				+ university + ", qualification=" + qualification + ", reference=" + reference + ", fatherFirstName="
 				+ fatherFirstName + ", fatherSecondName=" + fatherSecondName + ", fatherMobileContact="
 				+ fatherMobileContact + ", fatherOtherContact=" + fatherOtherContact + ", address1=" + address1
-				+ ", address2=" + address2 + ", email=" + email + ", coursename=" + coursename + "]";
+				+ ", address2=" + address2 + ", email=" + email + "]";
 	}
 	
 	
