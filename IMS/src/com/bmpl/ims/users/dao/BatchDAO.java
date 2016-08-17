@@ -15,33 +15,25 @@ import com.bmpl.ims.users.dto.CourseDTO;
 
 public class BatchDAO {
 
-	public boolean addbatch(ArrayList<BatchDTO> arraybatch) throws SQLException, ClassNotFoundException
+	public boolean addbatch(BatchDTO batchdto) throws SQLException, ClassNotFoundException
 	{
 		boolean isaddbatch=false;
 		String sql  = CommonSQLConstants.ADDBATCH_SQL;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		Integer row=null;
-		//String url2 = "jdbc:mysql://localhost:3306/admin?user=root&password=sunil2345";
-		//ResourceBundle rb=ResourceBundle.getBundle("connetionfile");
-		//Class.forName(rb.getString("drivername"));
 		try{
-		//Class.forName("com.mysql.jdbc.Driver");
-		//Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/admin;",rb.getString("userid"),rb.getString("password"));
 		con=CommonDAO.getConnection();
-		for(BatchDTO batahlist: arraybatch)
-		{
 		pstmt=con.prepareStatement(sql);
-		pstmt.setString(1, batahlist.getBatchname());
-		pstmt.setString(2, batahlist.getCoursename());
-		pstmt.setString(3, batahlist.getTrainername());
-		pstmt.setLong(4, batahlist.getTotalsets());
-		pstmt.setString(5, batahlist.getDescription());
-		pstmt.setDate(6, (java.sql.Date)batahlist.getBatchstartdate());
-		pstmt.setString(7, batahlist.getStarttime());
-		pstmt.setString(8, batahlist.getEndtime());
+		pstmt.setString(1, batchdto.getBatchname());
+		pstmt.setString(2, batchdto.getCoursename());
+		pstmt.setString(3, batchdto.getTrainername());
+		pstmt.setLong(4, batchdto.getTotalsets());
+		pstmt.setString(5, batchdto.getDescription());
+		pstmt.setDate(6, (java.sql.Date)batchdto.getBatchstartdate());
+		pstmt.setString(7, batchdto.getStarttime());
+		pstmt.setString(8, batchdto.getEndtime());
 		row = pstmt.executeUpdate();
-		}
 		if(row>0)
 		{
 			isaddbatch=true;
