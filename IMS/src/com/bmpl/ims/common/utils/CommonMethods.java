@@ -120,4 +120,30 @@ public static ArrayList<String> getStudents() throws SQLException {
 		}
 		return list;
 	}
+	public static ArrayList<String> getStudents(String batchName) throws SQLException {
+		
+		
+		String sql = CommonSQLConstants.GETSTUDENTLIST(batchName);;
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			con = CommonDAO.getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				StudentDTO studentdto=new StudentDTO();
+				studentdto.setName(rs.getString("studentname"));
+				list.add(studentdto.getName());
+			}
+			System.out.println(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			con.close();
+		}
+		return list;
+
+	}
 }
