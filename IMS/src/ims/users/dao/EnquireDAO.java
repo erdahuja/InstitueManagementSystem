@@ -4,13 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-
 import com.bmpl.ims.common.dao.CommonDAO;
 import com.bmpl.ims.common.dao.CommonSQLConstants;
 import com.bmpl.ims.users.dto.EnquireDTO;
-import com.bmpl.ims.users.views.EnquireView;
 
 public class EnquireDAO {
 	public boolean addEnquire(EnquireDTO enquireDTO) throws ClassNotFoundException, SQLException{
@@ -37,9 +34,7 @@ public class EnquireDAO {
 		pstm.setString(14, enquireDTO.getUniversity());
 		pstm.setString(15, enquireDTO.getQualification());
 		pstm.setString(16, enquireDTO.getReference());
-		EnquireView enquireView = new EnquireView();
-		pstm.setTimestamp(17,enquireView.getCurrentTimeStamp());
-		//pstm.setString(18, enquireDTO.getEnquireContact());
+		java.sql.Date date;
 		
 		
 		rs = pstm.executeUpdate();
@@ -48,7 +43,7 @@ public class EnquireDAO {
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println("can't execute");
+			System.out.println("can't execiute");
 		}
 		finally{
 			con.close();
@@ -56,26 +51,32 @@ public class EnquireDAO {
 		return enquireadded;
 	
 	}
-
-	public static ArrayList<String> getCourse() throws SQLException, ClassNotFoundException
-	{
-		String getcourse = CommonSQLConstants.COURSE_SQL;
-		Statement stmt=null;
-		ResultSet rs=null;
-		Connection con= null;
-		ArrayList<String> courseList = new ArrayList<>();
-		
-		con=CommonDAO.getConnection();
-		stmt=con.createStatement();
-		rs=stmt.executeQuery(getcourse);
-		while(rs.next())
-		{
-			EnquireDTO enquireDTO= new EnquireDTO();
-			enquireDTO.setCoursename(rs.getString("coursename"));
-			courseList.add(enquireDTO.getCoursename());
-		}
-		return courseList;
+	
+	public ArrayList<String> getCourse() throws SQLException{
+		boolean courseShown = false;
+		String sql = CommonSQLConstants.VIEWCOURSE_SQL;
+		Connection con = null;
+		PreparedStatement pstm = null;
+			ResultSet rs;
+			ArrayList<String> list = new ArrayList();
+				try {
+					con = CommonDAO.getConnection();
+				
+				pstm = con.prepareStatement(sql);
+				rs = pstm.executeQuery();
+				
+				while(rs.next()){
+					list.add(rs.getString("CourseName"));
+					courseShown = true;
+				}
+				}
+					catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+				finally{
+					con.close();
+				}
+				return list;
+			}
 	}
-	}
-
 

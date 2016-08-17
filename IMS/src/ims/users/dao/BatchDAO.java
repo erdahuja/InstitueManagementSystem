@@ -6,12 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
-
 import com.bmpl.ims.common.dao.CommonDAO;
 import com.bmpl.ims.common.dao.CommonSQLConstants;
 import com.bmpl.ims.users.dto.BatchDTO;
-import com.bmpl.ims.users.dto.CourseDTO;
 
 public class BatchDAO {
 
@@ -56,7 +53,7 @@ public class BatchDAO {
 	
 	public static ArrayList<String> getCourse() throws SQLException, ClassNotFoundException
 	{
-		String getcourse = CommonSQLConstants.GETCOURSE_SQL;
+		String getcourse = CommonSQLConstants.VIEWCOURSE_SQL;
 		Statement stmt=null;
 		ResultSet rs=null;
 		Connection con= null;
@@ -69,7 +66,7 @@ public class BatchDAO {
 		while(rs.next())
 		{
 			batchdto= new BatchDTO();
-			batchdto.setCoursename(rs.getString("coursename"));
+			batchdto.setCoursename(rs.getString("course_name"));
 			batchdto.setCourse_id(rs.getInt("course_id"));
 			courseList.add(batchdto.getCoursename());
 		}
