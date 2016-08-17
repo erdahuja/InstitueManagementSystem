@@ -49,7 +49,8 @@ public class AddBatchView extends JFrame {
 	
 	public static void main(String[] args) {
 	
-					  new AddBatchView();
+		AddBatchView frame = new AddBatchView();
+		frame.setVisible(true);
 					
 		
 	}
@@ -92,12 +93,6 @@ public class AddBatchView extends JFrame {
 		Bth_name.setBounds(226, 65, 117, 20);
 		getContentPane().add(Bth_name);
 		
-		comboBox = new JComboBox();
-		comboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				selecteditem1=(String)comboBox.getSelectedItem();
-			}
-		});
 		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -194,7 +189,6 @@ public class AddBatchView extends JFrame {
 		endtime.setBounds(226, 315, 117, 20);
 		getContentPane().add(endtime);
 		
-		frame.setVisible(true);
 	}
 	
 	public void addbatch()
@@ -213,9 +207,8 @@ public class AddBatchView extends JFrame {
 		batchdto.setBatchstartdate(sqlDate);
 		batchdto.setStarttime(starttime.getText());
 		batchdto.setEndtime(endtime.getText());
-		arraybatch.add(batchdto);
 		try {
-			boolean isaddbatch = batchdao.addbatch(arraybatch);
+			boolean isaddbatch = batchdao.addbatch(batchdto);
 			if(isaddbatch)
 			{
 				JOptionPane.showMessageDialog(this, "Batch Added........");
@@ -239,6 +232,5 @@ public class AddBatchView extends JFrame {
 		des_area.setText("");
 		starttime.setText("");
 		endtime.setText("");
-		
 		}
 	}
