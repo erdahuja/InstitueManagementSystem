@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import com.bmpl.ims.common.dao.CommonSQLConstants;
-import com.bmpl.ims.users.views.FeePaymentView;
 
 public class CommonUtility {
 	private CommonUtility(){}
@@ -18,6 +17,7 @@ public class CommonUtility {
 	}
 
 	public static String getBalance(String sum){
+		
 		String sq=CommonSQLConstants.SUMOFPAYMENTS_SQL;
 		int newTotal=Integer.parseInt(sum)-Integer.parseInt(sq);
 		String nwtotal=String.valueOf(newTotal);
