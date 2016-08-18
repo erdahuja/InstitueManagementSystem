@@ -11,7 +11,17 @@ public class RegisterDTO {
 	private String fname;
 	private String batch;
 	private String state;
+	private String path;
 
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	
 	public String getState() {
 		return state;
 	}
@@ -23,7 +33,7 @@ public class RegisterDTO {
 	@Override
 	public String toString() {
 		return "RegisterDTO [name=" + name + ", address=" + address + ", phone=" + phone + ", course=" + course
-				+ ", mail=" + mail + ", country=" + country + ", fname=" + fname + ", batch=" + batch + "]";
+				+ ", mail=" + mail + ", country=" + country + ", fname=" + fname + ", batch=" + batch + ",Path =" + path +"]";
 	}
 
 	public String getName() {

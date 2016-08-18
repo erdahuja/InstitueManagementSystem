@@ -1,41 +1,56 @@
 package com.bmpl.ims.users.dto;
 
 public class StudentDTO {
-	
-	private String Name ;
-	String course_name;
-	String course_description;
-
-	public String getCourse_name() {
-		return course_name;
-	}
-
-	public void setCourse_name(String course_name) {
-		this.course_name = course_name;
-	}
-
-	public String getCourse_description() {
-		return course_description;
-	}
-
-	public void setCourse_description(String course_description) {
-		this.course_description = course_description;
-	}
+	String Name;
+	String Address;
+	String Fname;
+	String Mail;
+	String Phone;
 
 	public String getName() {
 		return Name;
 	}
 
-	public void setName(String name) {
-		Name = name;
+	public void setName(String Name) {
+		this.Name = Name;
+	}
+
+	public String getFname() {
+		return Fname;
+	}
+
+	public void setFname(String Fname) {
+		this.Fname = Fname;
+	}
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String Address) {
+		this.Address = Address;
+	}
+
+	public String getMail() {
+		return Mail;
+	}
+
+	public void setMail(String Mail) {
+		this.Mail = Mail;
+	}
+
+	public String getPhone() {
+		return Phone;
+	}
+
+	public void setPhone(String fees) {
+		this.Phone = Phone;
 	}
 
 	@Override
 	public String toString() {
-		return "StudentDTO [Name=" + Name + ", course_name=" + course_name + ", course_description="
-				+ course_description + "]";
+		return "TrainerDTO [Name=" + Name + ", Address=" + Address
+				+ ", Phone=" + Phone + ", Mail=" + Mail + ", Fname=" + Fname + "]";
 	}
 
-	
 }
-
