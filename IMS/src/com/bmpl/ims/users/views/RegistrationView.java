@@ -1,23 +1,33 @@
 package com.bmpl.ims.users.views;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.bmpl.ims.common.utils.CommonMethods;
+import com.bmpl.ims.common.CommonMethods;
 import com.bmpl.ims.users.dao.RegisterDAO;
 import com.bmpl.ims.users.dto.RegisterDTO;
+import com.bmpl.ims.users.dto.StudentDTO;
+import com.bmpl.ims.users.dto.TrainerDTO;
 
 
 
@@ -31,21 +41,28 @@ import com.bmpl.ims.users.dto.RegisterDTO;
 public class RegistrationView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtName;
-	private JTextField txtAddress;
-	private JTextField txtPhone;
-	private JTextField txtEmail;
-	private JTextField txtFather;
-	private JTextField txtState;
-	private JList<String> list1;
-	private DefaultListModel<String> listModel = new DefaultListModel<String>();
-	private ArrayList<String> list;
+	private static JTextField txtName;
+	private static JTextField txtAddress;
+	private static JTextField txtPhone;
+	private static JTextField txtEmail;
+	private static JTextField txtFather;
+	/*private static JTextField txtCourse;
+	private static JTextField txtBatch;*/
+	private static JList<String> list1;
 	
-	private JList<String> list2;
+	 private static JList<String> list_1;
+	private DefaultListModel<String> listModel = new DefaultListModel<String>();
+	private static ArrayList<String> list;
+	private JButton btnUpload;
+	JLabel lblEnrollmentNumber;
+	JScrollPane scrollPane1;
 	private DefaultListModel<String> listModel1 = new DefaultListModel<String>();
 	
 
-	private ArrayList<String> batchList;
+	private static ArrayList<String> batchList;
+	private ImageIcon image;
+	private String ImagePath;
+	private byte[] userimage;
 	private JFrame frame=new JFrame();
 
 	/**
@@ -77,9 +94,13 @@ public class RegistrationView extends JFrame {
 		txtName.setBounds(91, 36, 173, 20);
 		contentPane.add(txtName);
 		txtName.setColumns(10);
+		
+		JLabel lblPhoto = new JLabel("Photo :");
+		lblPhoto.setBounds(296, 28, 112, 124);
+		
 
 		JLabel lblAddress = new JLabel("Address : ");
-		lblAddress.setBounds(10, 96, 79, 14);
+		lblAddress.setBounds(10, 96, 63, 14);
 		contentPane.add(lblAddress);
 
 		txtAddress = new JTextField();
@@ -88,7 +109,7 @@ public class RegistrationView extends JFrame {
 		txtAddress.setColumns(10);
 
 		JLabel lblPhoneNumber = new JLabel("Phone :");
-		lblPhoneNumber.setBounds(10, 166, 112, 14);
+		lblPhoneNumber.setBounds(10, 166, 63, 14);
 		contentPane.add(lblPhoneNumber);
 
 		txtPhone = new JTextField();
@@ -97,7 +118,7 @@ public class RegistrationView extends JFrame {
 		txtPhone.setColumns(10);
 
 		JLabel lblEmail = new JLabel("Email :");
-		lblEmail.setBounds(10, 238, 46, 14);
+		lblEmail.setBounds(10, 238, 63, 14);
 		contentPane.add(lblEmail);
 
 		txtEmail = new JTextField();
@@ -106,18 +127,73 @@ public class RegistrationView extends JFrame {
 		txtEmail.setColumns(10);
 
 		JLabel lblCourse = new JLabel("Course :");
-		lblCourse.setBounds(10, 316, 78, 14);
-		contentPane.add(lblCourse);
+		lblCourse.setBounds(10, 316, 63, 14);
+		contentPane.add(lblCourse);		
 
+		btnUpload = new JButton("Upload");
+		btnUpload.setBounds(503, 34, 89, 23);
+		contentPane.add(btnUpload);
+		
+		btnUpload.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Image", "jpg", "png");
+				fileChooser.addChoosableFileFilter(filter);
+				int result = fileChooser.showSaveDialog(null);
+				
+				if(result == JFileChooser.APPROVE_OPTION ){
+					contentPane.add(lblPhoto);
+					File selectedFile = fileChooser.getSelectedFile();
+					String path = selectedFile.getAbsolutePath();
+					lblPhoto.setIcon(ResizeImage(path));
+				}
+				else if(result == JFileChooser.CANCEL_OPTION){
+					System.out.println("No File Selected");
+				}
+			
+			}
 
+			private Icon ResizeImage(String ImagePath) {
+				ImageIcon MyImage = new ImageIcon(ImagePath);
+				Image img = MyImage.getImage();
+				Image newImg = img.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(),Image.SCALE_SMOOTH);
+				 image = new ImageIcon(newImg);
+				
+				File imgfile = new File(ImagePath);
+				 
+				  try{
+					FileInputStream fin = new FileInputStream(imgfile);
+					 ByteArrayOutputStream baos= new ByteArrayOutputStream();
+				        byte[] buff = new byte[1024];
+				        for(int readNum; (readNum=fin.read(buff)) !=-1 ; ){
+				            baos.write(buff,0,readNum);
+				        }
+				         userimage = baos.toByteArray();
+				       
+				    }
+				    catch(Exception e){
+				        JOptionPane.showMessageDialog(null, e);
+				    }   
+				  
+				  
+						return image;
+						 
+				
+			} 
+		});
+		
 		JLabel lblFathersName = new JLabel("Father's name :");
-		lblFathersName.setBounds(296, 38, 111, 14);
+		lblFathersName.setBounds(296, 166, 111, 14);
 		contentPane.add(lblFathersName);
 
 		txtFather = new JTextField();
-		txtFather.setBounds(425, 36, 153, 20);
+		txtFather.setBounds(425, 163, 153, 20);
 		contentPane.add(txtFather);
 		txtFather.setColumns(10);
+
+		
+		
 
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
@@ -137,18 +213,8 @@ public class RegistrationView extends JFrame {
 		btnExit.setBounds(418, 380, 89, 23);
 		contentPane.add(btnExit);
 
-	
-		JLabel lblState = new JLabel("State :");
-		lblState.setBounds(301, 96, 63, 14);
-		contentPane.add(lblState);
-
-		txtState = new JTextField();
-		txtState.setBounds(425, 94, 153, 20);
-		contentPane.add(txtState);
-		txtState.setColumns(10);
-
 		JLabel lblBatch = new JLabel("Batch :");
-		lblBatch.setBounds(301, 241, 89, 14);
+		lblBatch.setBounds(296, 238, 89, 14);
 		contentPane.add(lblBatch);
 
 		
@@ -159,17 +225,9 @@ public class RegistrationView extends JFrame {
 		lblRegistration.setBounds(238, -1, 126, 25);
 		contentPane.add(lblRegistration);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(433, 253, 145, 54);
-		contentPane.add(scrollPane);
-		frame.setVisible(true);
-		
+		 
 
 		listModel = new DefaultListModel<String>();
-		 list1 = new JList<String>(listModel);
-		list1.setValueIsAdjusting(true);
-		list1.setBounds(91, 282, 173, 86);
-		contentPane.add(list1);
 		
 		try {
 			list = CommonMethods.getCourse();
@@ -181,19 +239,35 @@ public class RegistrationView extends JFrame {
 			e.printStackTrace();
 		}
 		
-		JScrollPane scrollPane1 = new JScrollPane();
-		scrollPane.setBounds(425, 204, 145, 103);
+	 scrollPane1 = new JScrollPane();
+		scrollPane1.setBounds(91, 283, 173, 86);
+		contentPane.add(scrollPane1);
+		list1 = new JList<String>(listModel);
+		scrollPane1.setViewportView(list1);
+		list1.setValueIsAdjusting(true);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(425, 238, 153, 92);
 		contentPane.add(scrollPane);
+		
+		list_1 = new JList();
+		scrollPane.setViewportView(list_1);
+		
+		 lblEnrollmentNumber = new JLabel("Enrollment number");
+		lblEnrollmentNumber.setBounds(296, 338, 197, 31);
+		contentPane.add(lblEnrollmentNumber);
+		
+		JLabel lblPicture = new JLabel("Picture : ");
+		lblPicture.setBounds(447, 38, 46, 14);
+		contentPane.add(lblPicture);
+		
+		
 		frame.setVisible(true);
 		
 		listModel1 = new DefaultListModel<String>();
-		 list2 = new JList<String>(listModel1);
-		list2.setValueIsAdjusting(true);
-		list2.setBounds(425, 204, 145, 103);
-		contentPane.add(list2);
 		
 		try {
-			batchList = CommonMethods.getCourse(); //change to getBatch();
+			batchList = CommonMethods.getBatches(); 
 			for (String batches : batchList){
 				listModel1.addElement(batches);
 			}
@@ -210,14 +284,18 @@ public class RegistrationView extends JFrame {
 
 		RegisterDAO registerDAO = new RegisterDAO();
 		RegisterDTO registerDTO = new RegisterDTO();
-
+		TrainerDTO trainerDTO = new TrainerDTO();
+		
 		registerDTO.setName(txtName.getText());
+		registerDTO.setFname(txtFather.getText());
 		registerDTO.setAddress(txtAddress.getText());
-		registerDTO.setState(txtState.getText());
+		
 		registerDTO.setPhone(txtPhone.getText());
 		registerDTO.setMail(txtEmail.getText());
 		
-		registerDTO.setFname(txtFather.getText());
+		registerDTO.setPath(ImagePath);
+		registerDTO.setCourse(list_1.getSelectedValue());
+		registerDTO.setBatch(list1.getSelectedValue());
 
 		try {
 			registerDAO.register(registerDTO);
@@ -226,6 +304,9 @@ public class RegistrationView extends JFrame {
 
 			e.printStackTrace();
 		}
+		String id = generateEnrollment(trainerDTO);
+		lblEnrollmentNumber.setText(id);
+		
 	}
 
 	
@@ -234,4 +315,48 @@ public class RegistrationView extends JFrame {
 		System.exit(0);
 
 	}
+	
+	public static String viewStudent(StudentDTO studentDTO) {
+
+		txtName.setText(studentDTO.getName());
+		txtAddress.setText(studentDTO.getAddress());
+		txtFather.setText(studentDTO.getFname());
+		txtEmail.setText(studentDTO.getMail());
+		txtPhone.setText(studentDTO.getPhone());
+		/*list_1.setSelectedValue(trainerDTO.getPhone());
+		list.setText(trainerDTO.getPhone());
+*/
+		String info = "Name :" + studentDTO.getName() + "\nFather :"
+				+ studentDTO.getFname() + "\nPhone :" + studentDTO.getPhone()
+				+ "\nAddress :" + studentDTO.getAddress() + "\nMail :"
+				+ studentDTO.getMail();
+
+		return info;
+
+	}
+	
+	public static String viewCourse(TrainerDTO trainerDTO) {
+
+		txtName.setText(trainerDTO.getName());
+		txtAddress.setText(trainerDTO.getAddress());
+		txtFather.setText(trainerDTO.getFname());
+		txtEmail.setText(trainerDTO.getMail());
+		txtPhone.setText(trainerDTO.getPhone());
+		/*list_1.setSelectedValue(trainerDTO.getPhone());
+		list.setText(trainerDTO.getPhone());
+*/
+		String info = "Name :" + trainerDTO.getName() + "\nFather :"
+				+ trainerDTO.getFname() + "\nPhone :" + trainerDTO.getPhone()
+				+ "\nAddress :" + trainerDTO.getAddress() + "\nMail :"
+				+ trainerDTO.getMail();
+
+		return info;
+
+	}
+	
+	private String generateEnrollment(TrainerDTO trainerDTO){
+		String id = "Calendar.MONTH" +trainerDTO.getName();
+		return id;
+	}
 }
+

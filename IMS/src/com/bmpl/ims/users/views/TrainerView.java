@@ -1,6 +1,7 @@
 package com.bmpl.ims.users.views;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.bmpl.ims.common.CommonMethods;
-import com.bmpl.ims.users.dao.StudentDAO;
+import com.bmpl.ims.users.dao.TrainerDAO;
 
-public class StudentView extends JFrame {
+public class TrainerView extends JFrame {
 	
 
 	private JPanel contentPane;
@@ -31,13 +32,13 @@ public class StudentView extends JFrame {
 static JFrame frame= new JFrame();
 	public static void main(String[] args) {
 
-		 new StudentView();
+		 new TrainerView();
 	
 
 	}
 
-	public StudentView() {
-		frame.setTitle("Update Students");
+	public TrainerView() {
+		frame.setTitle("Update Courses");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 700, 350);
 		contentPane = new JPanel();
@@ -63,7 +64,7 @@ static JFrame frame= new JFrame();
 						textUpdateArea.setVisible(false);
 						lblCou.setVisible(false);
 					}
-					textUpdateArea.setText(StudentDAO.showCourse(courseList.getSelectedValue()).toString());
+					textUpdateArea.setText(TrainerDAO.showCourse(courseList.getSelectedValue()).toString());
 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -74,7 +75,7 @@ static JFrame frame= new JFrame();
 
 		});
 
-		JButton btnCourses = new JButton("View Students");
+		JButton btnCourses = new JButton("View Courses");
 		btnCourses.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -107,7 +108,7 @@ static JFrame frame= new JFrame();
 					
 
 				} else {
-					JOptionPane.showMessageDialog(null, "No student Selected");
+					JOptionPane.showMessageDialog(null, "No course Selected");
 				}
 
 			}
@@ -139,7 +140,7 @@ static JFrame frame= new JFrame();
 						System.out.println("JOptionPane closed");
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "No student Selected");
+					JOptionPane.showMessageDialog(null, "No course Selected");
 				}
 
 			}
@@ -147,7 +148,7 @@ static JFrame frame= new JFrame();
 		btnDelete.setBounds(397, 275, 117, 25);
 		contentPane.add(btnDelete);
 
-		lblCou = new JLabel("Student Selected :");
+		lblCou = new JLabel("Course Selected :");
 		lblCou.setBounds(276, 27, 238, 40);
 		contentPane.add(lblCou);
 		lblCou.setVisible(false);
@@ -163,14 +164,14 @@ static JFrame frame= new JFrame();
 
 	protected void update(String item) {
 
-		StudentDAO studentDAO = new StudentDAO();
+		TrainerDAO trainerDAO = new TrainerDAO();
 		RegistrationView cv = null;
 		try {
 
-			textUpdateArea.setText(studentDAO.updateCourse(item));
+			textUpdateArea.setText(trainerDAO.updateCourse(item));
 			lblCou.setVisible(true);
 			textUpdateArea.setVisible(true);
-			System.out.println(StudentDAO.showCourse(item));
+			System.out.println(TrainerDAO.showCourse(item));
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -181,24 +182,24 @@ static JFrame frame= new JFrame();
 	}
 
 	protected void deleteItem(String item) {
-		StudentDAO studentDAO = new StudentDAO();
+		TrainerDAO trainerDAO = new TrainerDAO();
 		System.out.println(item);
 		try {
 			if (item != null) {
 
-				if (StudentDAO.deleteCourse(item)) {
-					String info = studentDAO.updateCourse(item);
+				if (TrainerDAO.deleteCourse(item)) {
+					String info = trainerDAO.updateCourse(item);
 					textUpdateArea.setText(info);
 					textUpdateArea.setVisible(true);
 					lblCou.setVisible(true);
-					JOptionPane.showMessageDialog(this, "Student Deleted " + item);
-					System.out.println("Student deleted :" + item);
+					JOptionPane.showMessageDialog(this, "Course Deleted " + item);
+					System.out.println("course deleted :" + item);
 					textUpdateArea.setVisible(false);
 					lblCou.setVisible(false);
 
 				}
 			} else {
-				JOptionPane.showMessageDialog(this, "No student to delete");
+				JOptionPane.showMessageDialog(this, "No course to delete");
 
 			}
 		} catch (SQLException e) {
@@ -229,4 +230,3 @@ static JFrame frame= new JFrame();
 	}
 
 }
-
