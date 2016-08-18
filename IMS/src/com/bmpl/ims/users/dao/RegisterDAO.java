@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.bmpl.ims.common.dao.CommonDAO;
-import com.bmpl.ims.common.dao.CommonSQLConstants;
+import com.bmpl.ims.common.CommonDAO;
+import com.bmpl.ims.common.CommonSQLConstants;
 
 
 public class RegisterDAO {
@@ -32,8 +32,9 @@ public class RegisterDAO {
 			 * 
 			 */
 			pstmt.setString(5, registerDTO.getMail());
-			pstmt.setString(6, registerDTO.getState());
+			pstmt.setString(6, registerDTO.getBatch()); 
 			pstmt.setString(7, registerDTO.getCourse());
+			pstmt.setString(8, registerDTO.getPath());
 			rs = pstmt.executeUpdate();
 
 			try {
@@ -55,3 +56,4 @@ public class RegisterDAO {
 	}
 
 }
+

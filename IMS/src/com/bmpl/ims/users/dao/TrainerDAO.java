@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import com.bmpl.ims.common.CommonDAO;
 import com.bmpl.ims.common.CommonSQLConstants;
 import com.bmpl.ims.users.dto.RegisterDTO;
-import com.bmpl.ims.users.dto.StudentDTO;
+import com.bmpl.ims.users.dto.TrainerDTO;
 import com.bmpl.ims.users.views.RegistrationView;
 import com.bmpl.ims.users.views.TrainerView;
 
-public class StudentDAO {
-	StudentDTO studentDTO;
+public class TrainerDAO {
+	TrainerDTO trainerDTO;
 
-	public boolean addCourse(StudentDTO studentDTO) throws ClassNotFoundException, SQLException {
+	public boolean addCourse(TrainerDTO trainerDTO) throws ClassNotFoundException, SQLException {
 		boolean courseAdded = false;
 		String sql = CommonSQLConstants.VIEWCOURSE_SQL;
 		Connection con = null;
@@ -26,11 +26,13 @@ public class StudentDAO {
 		try {
 			con = CommonDAO.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, studentDTO.getName());
-			pstmt.setString(2, studentDTO.getFname());
-			pstmt.setString(3, studentDTO.getMail());
-			pstmt.setString(4, studentDTO.getPhone());
-			pstmt.setString(5, studentDTO.getAddress());
+			pstmt.setString(1, trainerDTO.getName());
+			pstmt.setString(2, trainerDTO.getFname());
+			pstmt.setString(3, trainerDTO.getPhone());
+			pstmt.setString(4, trainerDTO.getAddress());
+			pstmt.setString(5, trainerDTO.getMail());
+			
+			
 			rs = pstmt.executeUpdate();
 			try {
 
@@ -49,7 +51,7 @@ public class StudentDAO {
 	}
 
 	public String getCourseInfo(String info) {
-		return RegistrationView.viewStudent(studentDTO);
+		return RegistrationView.viewCourse(trainerDTO);
 
 	}
 
@@ -60,7 +62,7 @@ public class StudentDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs;
 		String info = null;
-		studentDTO = new StudentDTO();
+		trainerDTO = new TrainerDTO();
 		RegistrationView cv = null;
 		try {
 
@@ -71,14 +73,14 @@ public class StudentDAO {
 
 			while (rs.next()) {
 
-				studentDTO.setName(rs.getString(3));
-				studentDTO.setFname(rs.getString(1));
-				studentDTO.setPhone(rs.getString(4));
-				studentDTO.setAddress(rs.getString(5));
-				studentDTO.setMail(rs.getString(2));
+				trainerDTO.setName(rs.getString(1));
+				trainerDTO.setFname(rs.getString(2));
+				trainerDTO.setPhone(rs.getString(3));
+				trainerDTO.setAddress(rs.getString(4));
+				trainerDTO.setMail(rs.getString(5));
 
 				cv = new RegistrationView();
-				info = RegistrationView.viewStudent(studentDTO);
+				info = RegistrationView.viewCourse(trainerDTO);
 
 				System.out.println("course viewed to update");
 
@@ -113,7 +115,7 @@ public class StudentDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Failed to delete student");
+			System.out.println("Failed to delete course");
 		} finally {
 			con.close();
 		}
@@ -163,5 +165,4 @@ public class StudentDAO {
 
 
 }
-
 
