@@ -38,7 +38,7 @@ public interface CommonSQLConstants {
 
 	public static String MAKEPAYMENT_SQL = "INSERT INTO `InstituteProject`.`feepayment`(`AdmissionNum`,`StudentName`,`CourseName`,"
 			+ "`TotalFee`,`Discount`,`PayableAmount`,`PaidAmount`,`DueAmount`,`Date`,`ModeofPayment`,`ChequeNum`,`BankName`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-	public static String SUMOFPAYMENTS_SQL = "select sum(PaidAmount) from feepayment where Date ==CURDATE()";
+//	public static String SUMOFPAYMENTS_SQL = "select sum(PaidAmount) from feepayment where Date ==CURDATE()";
 
 	public static String TAKEATTENDANCE_SQL = "Insert into attandance_table (attandance_date, studentname, batchname) Values (?,?,?)";
 	public static String GETSTUDENTLIST(String batchName)	
