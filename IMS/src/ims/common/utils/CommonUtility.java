@@ -16,7 +16,7 @@ public class CommonUtility {
 		
 	}
 
-	public static String getBalance(String sum){
+/*	public static String getBalance(String sum){
 		
 		String sq=CommonSQLConstants.SUMOFPAYMENTS_SQL;
 		int newTotal=Integer.parseInt(sum)-Integer.parseInt(sq);
@@ -24,7 +24,7 @@ public class CommonUtility {
 		
 	return nwtotal;
 	}
-
+*/
 }
 
 	
