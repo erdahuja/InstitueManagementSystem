@@ -162,8 +162,8 @@ public class AddExpenseView extends JFrame {
 						miscellaneous=Integer.parseInt(textMiscellaneous.getText());
 				 sum=capt_lease+advert+broadbnd+staff_sal+ maintain+miscellaneous;
 				 
-			String balance=	 CommonUtility.getBalance(String.valueOf(sum));
-			System.out.println(balance);
+			//String balance=	 CommonUtility.getBalance(String.valueOf(sum));
+			//System.out.println(balance);
 			textTotal.setText(String.valueOf(sum));
 				
 			}
