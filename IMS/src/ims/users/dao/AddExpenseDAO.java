@@ -48,9 +48,9 @@ public class AddExpenseDAO {
 			return expenseAdded;
 		
 	}
+}
 	
-	
-	public static Date getBalance(FeePaymentDTO feepaymentDTO) throws SQLException, ClassNotFoundException{
+	/*public static Date getBalance(FeePaymentDTO feepaymentDTO) throws SQLException, ClassNotFoundException{
 		String sq=CommonSQLConstants.SUMOFPAYMENTS_SQL;
 		Connection con=null;
 		PreparedStatement pstmt = null;
@@ -67,13 +67,13 @@ public class AddExpenseDAO {
 			//pstmt.setString(2,feepaymentDTO.getDate());
 		
 			rs = pstmt.executeUpdate();
-			/*try{
+			try{
 				
 			}catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("can't execute");
 
-			}*/
+			}
 		}finally {
 				// logger.debug("Resource Close Inside Finally");
 				con.close();
@@ -81,7 +81,7 @@ public class AddExpenseDAO {
 		return d1;
 		
 	}
-}
+}*/
 
 
 
